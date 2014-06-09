@@ -62,7 +62,7 @@ var get_mapa_estado = function( estado ){
 		url: '/templates/maps/template_'+estado+'.html',
 		beforeSend: function(){
 			//console.log( 'Cargando' );
-			resetAnimation();			
+			resetAnimation();
 		},
 		success: function( response ) {
 			//console.log( response );
@@ -71,24 +71,24 @@ var get_mapa_estado = function( estado ){
 
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
-			SITE.actual_municipio = estado;			
+			SITE.actual_municipio = estado;
 			
+			var municipios_list = [];
 			$('#stage .table-content, #stage .content_table').rollbar();
 			$('#stage .masterTooltip').each(function(){
 				var getTitle  = $(this).attr('title');
-				console.log(getTitle);
-				var items = new array(getTitle);
-				var ul;
-				$.each(items, function (index, value) {
-					if ( index === 0 )  {
-						$('.table_aguascalientes').append(ul);
-						ul = $('.items-table');
-					}
-					var li = $('.item-row p').append(value);
-					ul.append(li);
-				});
-				$('#table_estate').append(ul);
+				municipios_list.push( getTitle );
 			});
+			var ul = '';
+			$.each(municipios_list, function (index, value) {
+				if ( index === 0 )  {
+					$('.table_aguascalientes').append(ul);
+					ul = $('.items-table');
+				}
+				var li = $('.item-row p').append(value);
+				ul.append(li);
+			});
+			$('#table_estate').append(ul);
 		}
 	});
 };
