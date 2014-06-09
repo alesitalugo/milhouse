@@ -78,6 +78,12 @@ a , a img {
 	position: relative;
 }
 #header-logo{
+	position: fixed;
+	width: 100%;
+	height: auto;
+	z-index: 1000;
+}
+.header_background{
 	width: 874px;
 	background: url('../images/new/backHeader01.png');
 	height: 173px;
@@ -123,7 +129,7 @@ a , a img {
 	height: 107px;
 	background: url('../images/new/plantsLeft01.png');
 	left: 0px;
-	position: absolute;
+	position: fixed;
 	background-position: 245px 0px;
 }
 #wrap {
@@ -153,6 +159,8 @@ a , a img {
 	right: 0;
 	margin: 0px 0px 0px 0px;
 	top: 6%;
+	position: fixed;
+	z-index: 1500;
 }
 #header .nav{
 	margin: 0;
@@ -357,8 +365,8 @@ a , a img {
 #footer{
 	background-color: #fff;
 	height: 180px;
-	position: fixed;
-	bottom: 0;
+	position: absolute;
+	bottom: -80px;
 	width: 100%;
 	z-index: 10;
 }
@@ -431,7 +439,7 @@ a , a img {
 	width: 1002px;
 	height: 961px;
 	position: fixed;
-	bottom: -615px;
+	bottom: -715px;
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -444,6 +452,7 @@ a , a img {
 	text-align: center;
 	height: 147px;
 }
+
 
 
 /*ADD TITLES SECTION*/
@@ -487,7 +496,7 @@ a , a img {
 	width: 986px;
 	height: 801px;
 	position: fixed;
-	bottom: -530px;
+	bottom: -620px;
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -671,6 +680,7 @@ a , a img {
 #section_two .content .column_table{
 	width: 400px;
 	float: right;
+	position: relative;
 }
 .price_list{
 	width: 330px;

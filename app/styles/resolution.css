@@ -1,0 +1,8 @@
+@media all and (max-width: 980px)  {
+	.header_background a img {
+		width: 180px;
+	}
+	.header_background{
+		background-position: 0px -50px;
+	}
+}

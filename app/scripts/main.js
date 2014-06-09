@@ -1,27 +1,41 @@
 'use strict';
 /* jshint camelcase: false */
 /* global Backbone, _, alert */
-
+var width = $(window).outerWidth();
+var height = $(window).outerHeight();
 var SITE = (function(){
 	var site_loaded = false;
 	var actual_section = 'home';
 	var actual_estado = null;
+	var actual_municipio = null;
 	return{
 		'site_loaded': site_loaded,
 		'actual_section': actual_section,
 		'actual_estado': actual_estado,
+		'actual_municipio': actual_municipio,
 		global_sections: function(){
 			$('#header-logo').show();
 		},
 		rotate_circle: function( section ){
-			console.log( section );
-			$('.grass').rotate({animateTo: 180}, 100, 'expo');
-			$('.title_section').rotate({animateTo: 360}, 300, 'expo');
+			//console.log( 'imsection'+section );
+			//console.log('marygoroundwegoupandaroundwego');
+			$('.grass').rotate({animateTo: 180}, 3000, 'expo');
+			$('.title_section').rotate({animateTo: 360}, 3000, 'expo');
 			$('#add_title').removeClass().addClass(section);
 			$('#button_'+section).fadeIn();
+			$('#container').animate({'top':'55px'}, 1000 , 'expo');
 		}
 	};
 }());
+
+var resetAnimation = function(){
+	$('#container').css({'top':'-730px'});
+	/*	-webkit-transform: rotate(0deg);
+	-webkit-transform-origin: 50% 50%;*/
+	$('.grass').rotate({animateTo:0});
+	$('.title_section').rotate({animateTo: 0});
+};
+
 
 /***** AJAX REQUEST ***/
 var get_mapa_mexico = function(){
@@ -30,6 +44,7 @@ var get_mapa_mexico = function(){
 		url: '/templates/template_mapa.html',
 		beforeSend: function(){
 			// console.log( 'Cargando' );
+			resetAnimation();
 		},
 		success: function( response ) {
 			$('#home').hide();
@@ -47,31 +62,32 @@ var get_mapa_estado = function( estado ){
 		url: '/templates/maps/template_'+estado+'.html',
 		beforeSend: function(){
 			//console.log( 'Cargando' );
+			resetAnimation();			
 		},
 		success: function( response ) {
 			//console.log( response );
-			//console.log(estado);
+			console.log(estado);
 			$('#home').hide();
 
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
+			SITE.actual_municipio = estado;			
+			
 			$('#stage .table-content, #stage .content_table').rollbar();
-
-
 			$('#stage .masterTooltip').each(function(){
 				var getTitle  = $(this).attr('title');
 				console.log(getTitle);
-				var items = new Array(getTitle);
+				var items = new array(getTitle);
 				var ul;
 				$.each(items, function (index, value) {
-					if ( index%3 === 0 )  {
-						$('.table-content').append(ul);
+					if ( index === 0 )  {
+						$('.table_aguascalientes').append(ul);
 						ul = $('.items-table');
 					}
-					var li = $('.item-row .item-column p').append(value);
+					var li = $('.item-row p').append(value);
 					ul.append(li);
 				});
-				$('body').append(ul);
+				$('#table_estate').append(ul);
 			});
 		}
 	});
@@ -82,18 +98,20 @@ var get_calificacion = function(){
 		type: 'GET',
 		url: '/templates/template_calificacion.html',
 		beforeSend: function(){
-
+			resetAnimation();
 		},
 		success: function(response){
 			//console.log(response);
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('estado');
+			SITE.actual_section = 'calificacion';
 		}
 	});
 };
 
 var show_section_home = function(){
+	
 	$('#stage').hide();
 	$('#home').fadeIn();
 	$('#header-logo').hide();
@@ -138,6 +156,7 @@ app_router.on('route:ver_estado', function( estado ) {
 });
 app_router.on('route:ver_calificacion', function( calificacion ){
 	get_calificacion(calificacion);
+
 });
 Backbone.history.start({ pushState: true });
 
@@ -146,6 +165,15 @@ $('#stage').on('click', '#mexico_map path', function(){
 	SITE.actual_estado = $(this).data('estado');
 	var map_paths = document.querySelectorAll( '#mexico_map path' );
 	_.each( map_paths, function( path ){
+		path.style.fill = '#84b13c';
+	});
+	this.style.fill = '#4d6d0c';
+});
+
+$('#stage').on('click', '#Entidad .masterTooltip', function(){
+	SITE.actual_municipio = $('.masterTooltip').attr('title');
+	var map_municipio = document.querySelectorAll('#Entidad path') ;
+	_.each( map_municipio, function(path){
 		path.style.fill = '#84b13c';
 	});
 	this.style.fill = '#4d6d0c';
@@ -165,8 +193,16 @@ $('#next').on('click', function(e){
 		}
 		Backbone.history.navigate( 'estados/'+SITE.actual_estado, true );
 	}
-	if( SITE.actual_section === 'estado'){
-		Backbone.history.navigate( 'estados/'+SITE.actual_estado, true );
+	if( SITE.actual_section === 'estado/'+SITE.actual_estado){
+		if(SITE.actual_municipio == null){
+			alert('seleciona un municipio');
+			return 0;
+		}
+		Backbone.history.navigate( 'calificacion');
+		//console.log('im in this condition');
+	} 
+	if(SITE.actual_section === 'calificacion'){
+		Backbone.history.navigate('calificacion', true);
 	}
 });
 
@@ -182,12 +218,9 @@ $('.selected_calf').on('click', function(){
 
 
 
-$.easing.expo = function (x, t, b, c, d) {
-    return (t===d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
-};
 $('.table-content, .content_table, .tip_content').rollbar();
 
-$('#container').animate({'top':'0'}, 1000 , 'expo');
+
 $('.grass').rotate({animateTo: 180}, 100, 'expo');
 $('.title_section').rotate({animateTo:360}, 300, 'expo');
 $('.modal_button').on('click', function(){
@@ -206,7 +239,7 @@ $('#link_tips').on('click', function(){
 
 $('.masterTooltip').tooltips();
 
-var sizeAdjust = function(){
+/*var sizeAdjust = function(){
 	var width = $(window).outerWidth();
 	var height = $(window).outerHeight();
 
@@ -229,4 +262,4 @@ $(window).resize(function(){
 	sizeAdjust();
 });
 
-sizeAdjust();
+sizeAdjust();*/
