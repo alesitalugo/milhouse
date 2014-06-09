@@ -135,3 +135,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 		});
 	}
 })(jQuery);
+
+$.easing.expo = function (x, t, b, c, d) {
+    return (t===d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+};
