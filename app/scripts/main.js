@@ -72,23 +72,24 @@ var get_mapa_estado = function( estado ){
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
 			SITE.actual_municipio = estado;
-			
-			var municipios_list = [];
-			$('#stage .table-content, #stage .content_table').rollbar();
-			$('#stage .masterTooltip').each(function(){
-				var getTitle  = $(this).attr('title');
-				municipios_list.push( getTitle );
-			});
-			var ul = '';
-			$.each(municipios_list, function (index, value) {
-				if ( index === 0 )  {
-					$('.table_aguascalientes').append(ul);
-					ul = $('.items-table');
+
+			$.ajax({
+				type: 'GET',
+				contentType : 'application/json',
+				url: '/api/'+estado+'.json',
+				beforeSend: function(){
+					console.log( '/api/'+estado+'.json' );
+				},
+				success: function(response){
+					var html_table = '';
+					var aproved_class = '';
+					_.each( response, function( value, key ){
+						aproved_class = ( value == 1 ) ? 'aproved' : '';
+						html_table += '<div>'+key+'</div><div class='+aproved_class+'></div>';
+					});
+					$('#stage #table_estate ').html( html_table );
 				}
-				var li = $('.item-row p').append(value);
-				ul.append(li);
 			});
-			$('#table_estate').append(ul);
 		}
 	});
 };
