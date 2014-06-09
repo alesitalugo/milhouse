@@ -1,0 +1,323 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>si se vive</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        
+        <link rel="stylesheet" type="text/css" href="/styles/vendor/normalize.css">
+        <link rel="stylesheet" type="text/css" href="/styles/style.css">
+        <link rel="stylesheet" type="text/css" href="/styles/rog.css">
+        <link rel="stylesheet" type="text/css" href="/styles/vendor/jquery.rollbar.css">
+        <link rel="stylesheet" type="text/css" href="/font/stylesheet.css">
+        <!-- endbuild -->
+        <script src="/bower_components/modernizr/modernizr.js"></script>
+    </head>
+
+    <body>
+
+        <div id="branches-top"></div>
+        <div class="plant-left"></div>        
+        <div class="plant-right"></div>
+        <div id="header-logo">
+            <a href="#">
+                <img src="/images/new/sisevive01.png">
+            </a>
+        </div>
+
+        <div id="header">
+             <ul class="nav nav-pills pull-right">
+                <li class="menu-item" id="button_mapa">
+                    <a id="menu-estado" class="link-menu" data-menu="estado">
+                        <span class="icon"><i></i></span>
+                        <p>estado</p>
+                    </a>
+                </li>
+                <li class="menu-item " id="button_estado">
+                    <a class="link-menu" id="menudos" data-menu="municipio"> 
+                        <span class="icon"><i></i></span>
+                        <p>municipio</p>
+                    </a>
+                </li>
+                <li class="menu-item " id="button_calificacion">
+                    <a class="link-menu" id="menutres" data-menu="calificacion">
+                        <span class="icon"><i></i></span>
+                        <p>calificación</p>
+                    </a>
+                </li>
+                <li class="menu-item " id="button_precio">
+                    <a class="link-menu" id="menucuatro" data-menu="rangosprecio">
+                        <span class="icon"><i></i></span>
+                        <p>precio</p>
+                    </a>
+                </li>
+                <li class="menu-item " id="button_vivienda">
+                    <a class="link-menu" id="menucinco" data-menu="vivienda">
+                        <span class="icon"><i></i></span>
+                        <p>tipo de vivienda</p>
+                    </a>
+                </li>
+                <li class="menu-item " id="button_resultados">
+                    <a class="link-menu" id="menuseis" data-menu="grafica">
+                        <span class="icon"><i></i></span>
+                        <p>búsqueda</p>
+                    </a>
+                </li>
+                <li class="menu-item " id="button_busqueda">
+                    <a class="link-menu" id="menusiete" data-menu="materiales">
+                        <span class="icon"><i></i></span>
+                        <p>resultados</p>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        <div id="wrap" class="container">
+            <div id="container">
+                
+                <div class="section-row" id="maincontainer" data-sections="12">
+                    <section id="stage"></section>
+
+                    <section id="home" class="section activa" data-section>
+                        <div class="content">
+                        <div class="animate_intro">
+                            <div class="item_left">
+                                <div class="image">
+                                </div>
+                            </div>
+                            <div id="line" class="item_line">
+                                <img src="images/new/line02.png" class="line_home">
+                            </div>
+                            <div class="item_right">
+                                <div class="image"></div>
+                            </div>
+                        </div>
+                            <a  id="go_init"></a>
+                        </div>
+                    </section>
+                   
+                    <section id="section_ten" class="section ">
+                        <div class="content">   
+                            <div id="modal_box" class="modal_box">
+                                <div class="container_modal">
+                                    <div class="content_modal" data-modal="agua">
+                                        <a id="close_modal" class="close_modal"></a>                                    
+                                        <div class="modal_title">
+                                            <h2>AGUA</h2>
+                                            <p>Ahorro mensual con base en la zona bioclimatica : CALIDO SEMIHUMEDO</p>
+                                        </div>
+                                       
+                                        <div class="data-table" id="modal_table">
+                                            <div class="table-header">
+                                                <div class="item-row">
+                                                    <div class="item-column item_one">
+                                                        <p>Imágen</p>
+                                                    </div>
+                                            
+                                                    <div class="item-column item_two">
+                                                        <p>Ecotecnología</p>
+                                                    </div>
+                                                    <div class="item-column item_three">
+                                                        <p>Ahorro mensual</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-content" id="table_one">
+                                                <div class="items-table">
+                                                    <div class="item-row">
+                                                        <div class="item-column item_one">
+                                                            <div class="circle">
+                                                                <img src="images/new/imagen01.png" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="item-column item_two">
+                                                            <p >Una regadera grado ecológico con    dispositivo ahorrador integrado</p>
+                                                        </div>
+                                                        <div class="item-column item_three">
+                                                            <p>$7.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                                <div class="items-table">
+                                                    <div class="item-row">
+                                                        <div class="item-column item_one">
+                                                            <div class="circle">
+                                                                <img src="images/new/imagen01.png" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="item-column item_two">
+                                                            <p >Una regadera grado ecológico con    dispositivo ahorrador integrado</p>
+                                                        </div>
+                                                        <div class="item-column item_three">
+                                                            <p>$7.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                                <div class="items-table">
+                                                    <div class="item-row">
+                                                        <div class="item-column item_one">
+                                                            <div class="circle">
+                                                                <img src="images/new/imagen01.png" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="item-column item_two">
+                                                            <p >Una regadera grado ecológico con    dispositivo ahorrador integrado</p>
+                                                        </div>
+                                                        <div class="item-column item_three">
+                                                            <p>$7.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- MOCKUP PANTALLA 12 MODAL TIPS -->
+
+                    <section id="section_eleven" class="section ">
+                        <div class="content">
+                           <div id="modal_box" class="modal_box modal_tip">
+                                <div class="container_modal">
+                                    <div class="content_modal" data-modal="tips">
+                                        <a id="close_modal" class="close_modal"></a>
+                                        <ul id="modal_nav">
+                                            <li class="modal_nav_item">
+                                                <a href="#" class="modal_button active" id="agua_modal">
+                                                    agua
+                                                <span class="guide_active"></span>                                                    
+                                                </a>
+                                            </li>
+                                            <li class="modal_nav_item">
+                                                <a href="#" class="modal_button" id="gas_modal">
+                                                    gas
+                                                <span class="guide_active"></span>                                                    
+                                                </a>
+                                            </li>
+                                            <li class="modal_nav_item">
+                                                <a href="#" class="modal_button" id="salud_modal">
+                                                    salud
+                                                <span class="guide_active"></span>                                                    
+                                                </a>
+                                            </li>
+                                            <li class="modal_nav_item">
+                                                <a href="#" class="modal_button" id="luz_modal">
+                                                    luz
+                                                <span class="guide_active"></span>                                                    
+                                                </a>
+                                            </li>
+                                        </ul>                                   
+                                        <div class="modal_title">
+                                            <h2>TiPS</h2>
+                                            <div class="description_tip">
+                                                <p>Inst. Hidraulica</p>
+                                            </div>
+                                        </div>
+                                       
+                                        <div id="tip_content">
+                                            <div class="tip_content">
+                                                <div class="text_tip">
+                                                <p>Revisa que la instalación de hidráulica de tu vivienda no presente fugas o deterioro en las tuberías. -Conoce tu consumo actual de agua y contrástalo con el consumo domestico promedio por habitante para tu localidad, te servirá para saber que tan buenos o malos son tus hábitos de consumo. -Si has aplicado medidas de ahorro, verifica tu consumo mensual con los recibos de agua para saber si las medidas que tomaste son las correctas</p>
+                                            </div>
+                                            <div class="tip_image">
+                                                <img src="images/new/tips01.png">
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>                
+            </div>
+            <div id="round">     
+                <div class="title_section">
+                    <div id="add_title" class="intro">
+                    </div>
+                </div>
+                <div class="grass"></div>                                           
+            </div>
+            <div id="footer">                
+                <div class="nav_menu">
+                    <a class="arrow" id="prev" href="">
+                    </a>
+                    <div id="logo">
+                        <a href="#">
+                            <img src="images/new/infonavit01.png">
+                        </a>
+                    </div>
+                    <a class="arrow" id="next" href="">                        
+                    </a> 
+                </div>
+                <div  id="assets-footer">
+                    <ul id="page_menu">
+                        <li class="page-item" id="link_home">
+                            <span class="icon"></span>
+                            <a href="index.html">home</a>
+                        </li>
+                        <li class="page-item" id="link_video">
+                            <span class="icon"></span>                        
+                            <a href="#">video</a>
+                        </li>                        
+                        <li class="page-item" id="link_tips">
+                            <span class="icon"></span>                        
+                            <a href="#">tips</a>
+                        </li>                        
+                        <li class="page-item" id="link_desarrollo">
+                            <span class="icon"></span>                        
+                            <a href="#">desarrollo</a>
+                        </li>
+                    </ul>
+                    <ul id="external_links">
+                        <li class="external_item">
+                            <a href="#">inicio</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">trabajadores</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">patrones</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">infonavit ampliado y desarrolladores</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">el instituto</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">cuentas claras transparencia</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">contáctanos</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">términos y condiciones</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">aviso de privacidad</a>
+                        </li>
+                        <li class="external_item">
+                            <a href="#">acerca de este portal</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>    
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <!--<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>-->
+        <script type="text/javascript">
+            document.getElementsByTagName('body')[0].setAttribute('class','home');
+        </script>
+        <script src="/scripts/vendor/util.js"></script>
+        <script src="/scripts/main.js"></script>
+    </body>
+</html>

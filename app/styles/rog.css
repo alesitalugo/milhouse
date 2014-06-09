@@ -1,0 +1,6 @@
+#mexico_map path{
+	cursor: pointer;
+}
+#mexico_map path:hover{
+	background: red;
+}
