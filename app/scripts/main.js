@@ -29,10 +29,9 @@ var get_mapa_mexico = function(){
 		type: 'GET',
 		url: '/templates/template_mapa.html',
 		beforeSend: function(){
-			//console.log( 'Cargando' );
+			// console.log( 'Cargando' );
 		},
 		success: function( response ) {
-			//console.log('success');
 			$('#home').hide();
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('mapa');
@@ -78,7 +77,7 @@ var get_mapa_estado = function( estado ){
 	});
 };
 
-var get_calificacion = function(calificacion){
+var get_calificacion = function(){
 	$.ajax({
 		type: 'GET',
 		url: '/templates/template_calificacion.html',
@@ -101,21 +100,17 @@ var show_section_home = function(){
 	$('.line_home').animate({'height':'280px'}, 1000, function(){
 		$('.item_left').animate({
 			'left': '0px',
-			'opacity':1
+			'opacity': 1
 		}, 800, 'expo', function(){
 			$('.item_right').animate({
-				'left':'0px',
-				'opacity':1
+				'left': '0px',
+				'opacity': 1
 			}, 800, 'expo', function(){
 				$('#go_init').animate({
-					'opacity':1
+					'opacity': 1
 				}, 500);
 			});
 		});
-	});
-	$('#go_init').on('click', function(e){
-		e.preventDefault();
-		Backbone.history.navigate( 'estados', true );
 	});
 };
 
@@ -161,7 +156,7 @@ $('#next').on('click', function(e){
 	console.log( SITE.actual_section );
 
 	if( SITE.actual_section === 'home'){
-		Backbone.history.navigate( 'estados', true );
+		Backbone.history.navigate( 'estados' , true );
 	}
 	if( SITE.actual_section === 'estados'){
 		if(SITE.actual_estado === null){

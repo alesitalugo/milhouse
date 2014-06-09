@@ -82,7 +82,7 @@ module.exports = function (grunt) {
                         middlewares = [];
                         middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
                         options.base.forEach( function(base) {
-                            return middlewares.push(connect["static"](base));
+                            return middlewares.push(connect['static'](base));
                         });
                         return middlewares;
                     }
