@@ -1,3 +1,12 @@
+#Entidad path{}
+#Entidad path.path_active{
+	fill: #84b13c;
+	cursor: pointer;
+}
+#Entidad path.path_active:hover{
+	fill: #4d6d0c !important;
+}
+
 #mexico_map path{
 	cursor: pointer;
 }
@@ -7,7 +16,8 @@
 .tooltip_svg{
 	position: absolute;
 	display: none;
-	background: #4d6d0c;
+	background: #6eb32e;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 	color: white;
 	font-size: 13px;
 	padding: 5px 10px;
