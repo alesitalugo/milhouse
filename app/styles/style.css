@@ -452,10 +452,9 @@ a , a img {
 	left: 0px;
 	width: 650px;
 	text-align: center;
-	height: 147px;
+	height: 155px;
+	background-repeat: no-repeat;
 }
-
-
 
 /*ADD TITLES SECTION*/
 
@@ -472,7 +471,7 @@ a , a img {
 .title_section .calificacion{
 	background: url(../images/new/titles/title_p04.png);
 }
-.title_section .rangosprecio{
+.title_section .precio{
 	background: url(../images/new/titles/title_p05.png);
 }
 .title_section .vivienda{
@@ -755,6 +754,13 @@ a , a img {
 	background-color: #85b23d;
 	color: #fff;
 }
+.price_list .on{
+	background-color: #85b23d;
+	color: #fff;
+}
+.price_list .on > .go_link{
+	background-position:  -251px -53px;
+}
 .go_link{
 	background-image: url('../images/new/sprite01.png');
 	background-position: -209px -53px;
@@ -956,6 +962,10 @@ a , a img {
 	margin: 0;
 	padding: 0;
 }
+#section_six{
+	position: relative;
+	top: 0px;
+}
 .content_table {
 	height: 420px;
 	position: relative;
@@ -969,12 +979,17 @@ a , a img {
 .item-tipovivienda{
 	clear: both;
 	position: relative;
+	cursor: pointer;
 }
 .text-tipovivienda{
 	float: left;
 }
 .item-tipovivienda a{
 	text-decoration: none;
+}
+.on .text-tipovivienda p{
+		background-color:#fff !important;
+	color: #85b23d;
 }
 .text-tipovivienda p{
 	background-color: #85b23d !important;
@@ -1205,6 +1220,10 @@ a , a img {
     -o-transition: opacity 0.8s ease-out;
     transition: opacity 0.8s ease-out;
 }
+#section_five{
+	position: relative;
+	top: 100px;
+}
 .on{
 	opacity: 1;
 }
@@ -1377,6 +1396,10 @@ a.buttons_item:hover > .icon{
 }
 #modal_table .table-header .item-row{
 	width: 100%;
+}
+#section_seven{
+	position: relative;
+	top: 100px;
 }
 .circle {
 	height: 85px;
