@@ -30,7 +30,7 @@ var SITE = (function(){
 			$('#add_title').removeClass().addClass(section);
 
 			$('#button_'+section).fadeIn();
-			$('#container').animate({'top':'83px'}, 1000 , 'expo');
+			$('#container').animate({'top':'170px'}, 1000 , 'expo');
 		}
 	};
 }());
@@ -262,12 +262,6 @@ var get_grafica_resultados = function(){
 					colors: colors[i - 1]
 		        });
 		    }
-
-		    if ($.browser.msie  && parseInt($.browser.version, 10) === 8) {
-				alert('IE8');
-			} else {
-				alert('Non IE8');
-			}
 		}
 	});
 };
