@@ -128,7 +128,10 @@ var get_calificacion = function(){
 };
 
 var show_section_home = function(){
-	
+	$('#container').animate({'top':'250px'}, 1000 , 'expo');			
+	if(height<=800){
+		$('#container').animate({'top':'85px'}, 1000 , 'expo');			
+	}
 	$('#stage').hide();
 	$('#home').fadeIn();
 	$('#header-logo').hide();
@@ -176,7 +179,10 @@ app_router.on('route:ver_calificacion', function( calificacion ){
 
 });
 Backbone.history.start({ pushState: true });
+$('#stage').on('click', '.home_link', function(a){
+	a.preventDefault();
 
+});
 /**** ON CLICK EVENTS  ***/
 $('#stage').on('click', '#mexico_map path', function(){
 	SITE.actual_estado = $(this).data('estado');
@@ -269,8 +275,9 @@ $('.masterTooltip').tooltips();
 
 var sizeAdjust = function(){
 	if(height <= 750){		
+		$('#container').animate({'top':'110px'}, 1000, 'expo');
 		$('.container_modal').css({'margin':'70px auto'});
-		$('#container').animate({'top':'85px'}, 1000 , 'expo');		
+		//$('#container').animate({'top':'85px'}, 1000 , 'expo');		
 		$('.header_background a img').css({'width':'150px'});
 		$('#header').css({'top':'0px'});
 		$('.header_background').css({'background-position':'0px -70px'});
@@ -280,17 +287,19 @@ var sizeAdjust = function(){
 		$('.grass').css({'bottom':'-690px'});
 		$('.title_section').css({'bottom':'-790px'});
 	} else {
-
+		$('#footer').css({'bottom':'-10px'});
+		$('.grass').css({'bottom':'-540px'});
+		$('.title_section').css({'bottom':'-625px'});
 	}
-	if( height <= 980){
 
-	} else {
-
-	}
 }
 
 $(window).resize(function(){
+	width = $(window).outerWidth();
+	height = $(window).outerHeight();
+
 	sizeAdjust();
+	console.log(height);
 });
 
 sizeAdjust();
