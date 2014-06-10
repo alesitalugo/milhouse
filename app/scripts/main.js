@@ -25,11 +25,10 @@ var SITE = (function(){
 			$('#header-logo').show();
 		},
 		rotate_circle: function( section ){
-			//console.log( 'imsection'+section );
-			//console.log('marygoroundwegoupandaroundwego');
 			$('.grass').rotate({animateTo: 180}, 3000, 'expo');
 			$('.title_section').rotate({animateTo: 360}, 3000, 'expo');
 			$('#add_title').removeClass().addClass(section);
+
 			$('#button_'+section).fadeIn();
 			$('#container').animate({'top':'83px'}, 1000 , 'expo');
 		}
@@ -69,8 +68,6 @@ var wonder_cities_power_activate = function( municipios ){
 
 var resetAnimation = function(){
 	$('#container').css({'top':'-730px'});
-	/*	-webkit-transform: rotate(0deg);
-	-webkit-transform-origin: 50% 50%;*/
 	$('.grass').rotate({animateTo:0});
 	$('.title_section').rotate({animateTo: 0});
 };
@@ -106,10 +103,8 @@ var get_mapa_estado = function( estado ){
 		},
 		success: function( response ) {
 			//console.log( response );
-			console.log(estado);
+			//console.log(estado);
 			$('#home').hide();
-			
-			
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
 			SITE.actual_section = estado;
@@ -168,7 +163,6 @@ var get_calificacion = function(){
 			resetAnimation();
 		},
 		success: function(response){
-			
 			//console.log(response);
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
@@ -192,9 +186,8 @@ var get_tipo_vivienda = function(){
 		type: 'GET',
 		url:'/templates/template_vivienda.html',
 		beforeSend:function(){
-			console.log('loading');
 			resetAnimation();
-		} ,
+		},
 		success: function(response){
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
@@ -217,7 +210,6 @@ var get_rango_precio = function(){
 		type:'GET',
 		url:'/templates/template_precio.html',
 		beforeSend:function(){
-			//console.log('loading');
 			resetAnimation();
 		},
 		success: function(response){
@@ -243,14 +235,13 @@ var get_busqueda = function(){
 		type:'GET',
 		url:'/templates/template_busqueda.html',
 		beforeSend: function(){
-			//console.log('loading');
 			resetAnimation();
 		},
 		success: function(response){
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
-			SITE.rotate_circle('resultados');
-			SITE.actual_section = 'resultados';
+			SITE.rotate_circle('busqueda');
+			SITE.actual_section = 'busqueda';
 			$('.content_table').rollbar();
 		}
 	});
@@ -261,14 +252,13 @@ var get_grafica_resultados = function(){
 		type:'GET',
 		url: '/templates/template_grafica.html',
 		beforeSend: function(){
-			//console.log('loading');
 			resetAnimation();
 		},
 		success: function(response){
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
-			SITE.rotate_circle('grafica');
-			SITE.actual_section = 'grafica';
+			SITE.rotate_circle('resultados');
+			SITE.actual_section = 'resultados';
 			var colors = [['#e9ebbf', '#cccc33'], ['#f4d9ae', '#ff9900'], ['#cce2e8', '#66cccc'], ['#e0e0e0', '#8ba3a6'], ['#eee0b1', '#cc9900']];
             
 		    $('.round_graphic').each(function(){
@@ -333,7 +323,7 @@ var AppRouter = Backbone.Router.extend({
 		'vivienda': 'ver_vivienda',
 		'precio': 'ver_precio',
 		'busqueda': 'ver_busqueda',
-		'grafica': 'ver_grafica',
+		'resultados': 'ver_resultados',
 
 	}
 });
@@ -351,7 +341,7 @@ app_router.on('route:ver_estado', function( estado ) {
 });
 app_router.on('route:ver_calificacion', function( calificacion ){
 	get_calificacion(calificacion);
-
+	SITE.global_sections();
 });
 app_router.on('route:ver_vivienda', function(vivienda){
 	get_tipo_vivienda(vivienda);
@@ -362,8 +352,8 @@ app_router.on('route:ver_precio', function(precio){
 app_router.on('route:ver_busqueda', function(busqueda){
 	get_busqueda(busqueda);
 });
-app_router.on('route:ver_grafica', function(grafica){
-	get_grafica_resultados(grafica);
+app_router.on('route:ver_resultados', function(resultados){
+	get_grafica_resultados(resultados);
 });
 Backbone.history.start({ pushState: true });
 $('#stage').on('click', '.home_link', function(a){
@@ -402,12 +392,11 @@ $('.link-menu').on('click',  function(e){
 
 
 $('#stage').on('click', '.more_button', function(){
-	Backbone.history.navigate('grafica', true);
+	Backbone.history.navigate('resultados', true);
 });
 
 $('#next').on('click', function(e){
 	e.preventDefault();
-	
 	if( SITE.actual_section === 'home'){
 		Backbone.history.navigate( 'estados' , true );
 	}
@@ -432,6 +421,14 @@ $('#next').on('click', function(e){
 			alert('Selecciona una calificacion');
 			return 0;
 		}
+		Backbone.history.navigate('precio', true);
+	}
+	
+	if(SITE.actual_section === 'precio'){
+		if(SITE.actual_rango === null){
+			alert('selecciona un rango de precio');
+			return 0;
+		}
 		Backbone.history.navigate('vivienda', true);
 	}
 	if(SITE.actual_section === 'vivienda'){
@@ -440,18 +437,11 @@ $('#next').on('click', function(e){
 			alert('Selecciona un tipo de vivienda');
 			return 0;
 		}
-		Backbone.history.navigate('precio', true);
-	}
-	if(SITE.actual_section === 'precio'){
-		if(SITE.actual_rango === null){
-			alert('selecciona un rango de precio');
-			return 0;
-		}
 		Backbone.history.navigate('busqueda', true);
 	}
 	if(SITE.actual_section === 'resultados'){
 		console.log('im in ');
-		Backbone.history.navigate('grafica', true);
+		Backbone.history.navigate('resultados', true);
 	}
 
 });
@@ -492,7 +482,8 @@ $('.masterTooltip').tooltips();
 
 var sizeAdjust = function(){
 	if(height <= 750){
-		$('#container').animate({'top':'110px'}, 1000, 'expo');
+		console.log('resize function active');
+		$('#container').animate({'top':'65px'}, 1000, 'expo');
 		$('.container_modal').css({'margin':'70px auto'});
 		//$('#container').animate({'top':'85px'}, 1000 , 'expo');		
 		$('.header_background a img').css({'width':'150px'});
@@ -501,8 +492,9 @@ var sizeAdjust = function(){
 		$('#header-logo a').css({'width':'155px'});
 		$('.header_background').css({'height':'100px'});
 		$('#footer').css({'bottom':'-152px'});
-		$('.grass').css({'bottom':'-690px'});
-		$('.title_section').css({'bottom':'-790px'});
+		$('.grass').css({'bottom':'-680px'});
+		$('.title_section').css({'bottom':'-760px'});
+		$('.nav_menu .arrow').css({'top':'-55px'});
 	} else {
 		$('#footer').css({'bottom':'-10px'});
 		$('.grass').css({'bottom':'-540px'});

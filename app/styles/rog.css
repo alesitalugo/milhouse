@@ -16,11 +16,12 @@
 .tooltip_svg{
 	position: absolute;
 	display: none;
-	background: #6eb32e;
-	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+	background: #323200;
 	color: white;
 	font-size: 13px;
-	padding: 5px 10px;
-	border-radius: 3px;
+	padding:13px;
+	text-transform: uppercase;
+	border-radius: 18px;
 	text-align: center;
+    font-family: 'nilland-smallcapsregular';	
 }
