@@ -8,6 +8,7 @@ var SITE = (function(){
 	var actual_section = 'home';
 	var actual_estado = null;
 	var actual_municipio = null;
+
 	return{
 		'site_loaded': site_loaded,
 		'actual_section': actual_section,
@@ -23,7 +24,7 @@ var SITE = (function(){
 			$('.title_section').rotate({animateTo: 360}, 3000, 'expo');
 			$('#add_title').removeClass().addClass(section);
 			$('#button_'+section).fadeIn();
-			$('#container').animate({'top':'55px'}, 1000 , 'expo');
+			$('#container').animate({'top':'83px'}, 1000 , 'expo');
 		}
 	};
 }());
@@ -35,7 +36,6 @@ var resetAnimation = function(){
 	$('.grass').rotate({animateTo:0});
 	$('.title_section').rotate({animateTo: 0});
 };
-
 
 /***** AJAX REQUEST ***/
 var get_mapa_mexico = function(){
@@ -51,10 +51,11 @@ var get_mapa_mexico = function(){
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('mapa');
 			SITE.actual_section	= 'estados';
+			
+
 		}
 	});
 };
-
 
 var get_mapa_estado = function( estado ){
 	$.ajax({
@@ -68,10 +69,12 @@ var get_mapa_estado = function( estado ){
 			//console.log( response );
 			console.log(estado);
 			$('#home').hide();
-
+			
+			
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
-			SITE.actual_municipio = estado;
+			SITE.actual_section = estado;
+			SITE.actual_estado = estado;
 
 			$.ajax({
 				type: 'GET',
@@ -81,13 +84,34 @@ var get_mapa_estado = function( estado ){
 					console.log( '/api/'+estado+'.json' );
 				},
 				success: function(response){
+					var localidad_save = '';	
+					$('#menudos').data('menu', 'aaa');
+								
 					var html_table = '';
+					var localidad = '';
 					var aproved_class = '';
 					_.each( response, function( value, key ){
 						aproved_class = ( value == 1 ) ? 'aproved' : '';
-						html_table += '<div>'+key+'</div><div class='+aproved_class+'></div>';
+						//console.log(key);
+						var spaceout = key.split(' ').join('_');
+						//console.log(spaceout);
+						html_table += '<div class="item-localidad" data-municipio="'+spaceout+'"><p>'+key+'</p><div class='+aproved_class+'></div></div>';
 					});
+
 					$('#stage #table_estate ').html( html_table );
+					$('.table-content').rollbar();
+					$('.aproved').on('click', function(){
+						$('.item-localidad').removeClass('select_item');
+						var allitem = $(this).parent();
+						$(allitem).addClass('select_item');
+						
+
+						localidad = $(allitem).data('municipio');
+						console.log(localidad);
+					});	
+
+					localidad_save =  localidad;
+					SITE.actual_municipio = localidad_save;
 				}
 			});
 		}
@@ -112,7 +136,10 @@ var get_calificacion = function(){
 };
 
 var show_section_home = function(){
-	
+	$('#container').animate({'top':'250px'}, 1000 , 'expo');			
+	if(height<=800){
+		$('#container').animate({'top':'85px'}, 1000 , 'expo');			
+	}
 	$('#stage').hide();
 	$('#home').fadeIn();
 	$('#header-logo').hide();
@@ -160,10 +187,14 @@ app_router.on('route:ver_calificacion', function( calificacion ){
 
 });
 Backbone.history.start({ pushState: true });
+$('#stage').on('click', '.home_link', function(a){
+	a.preventDefault();
 
+});
 /**** ON CLICK EVENTS  ***/
 $('#stage').on('click', '#mexico_map path', function(){
 	SITE.actual_estado = $(this).data('estado');
+
 	var map_paths = document.querySelectorAll( '#mexico_map path' );
 	_.each( map_paths, function( path ){
 		path.style.fill = '#84b13c';
@@ -171,20 +202,32 @@ $('#stage').on('click', '#mexico_map path', function(){
 	this.style.fill = '#4d6d0c';
 });
 
-$('#stage').on('click', '#Entidad .masterTooltip', function(){
-	SITE.actual_municipio = $('.masterTooltip').attr('title');
-	var map_municipio = document.querySelectorAll('#Entidad path') ;
+$('#stage').on('click', '#Entidad path', function(){
+
+	SITE.actual_localidad = $(this).data('municipio');
+
+	var map_municipio = document.querySelectorAll('#Entidad path');
 	_.each( map_municipio, function(path){
 		path.style.fill = '#84b13c';
 	});
 	this.style.fill = '#4d6d0c';
 });
 
+
+$('.link-menu').on('click',  function(e){
+	e.preventDefault();
+	var menu_link = $(this).data('menu');
+	console.log(menu_link);
+	Backbone.history.navigate(menu_link, true);
+});
+
+
+
 $('#next').on('click', function(e){
 	e.preventDefault();
-	console.log( SITE.actual_section );
-
-	if( SITE.actual_section === 'home'){
+	console.log( SITE.actual_section +' <3');
+	console.log(SITE.actual_municipio);
+	if( SITE.actual_section === 'home'){	
 		Backbone.history.navigate( 'estados' , true );
 	}
 	if( SITE.actual_section === 'estados'){
@@ -194,20 +237,23 @@ $('#next').on('click', function(e){
 		}
 		Backbone.history.navigate( 'estados/'+SITE.actual_estado, true );
 	}
-	if( SITE.actual_section === 'estado/'+SITE.actual_estado){
-		if(SITE.actual_municipio == null){
-			alert('seleciona un municipio');
+	if( SITE.actual_section === SITE.actual_estado){
+		console.log('im localidad', SITE.actual_municipio);	
+		if(SITE.actual_municipio === null){
+			alert('seleciona una localidad');
 			return 0;
 		}
-		Backbone.history.navigate( 'calificacion');
-		//console.log('im in this condition');
+		Backbone.history.navigate( 'calificacion', true);
 	} 
 	if(SITE.actual_section === 'calificacion'){
 		Backbone.history.navigate('calificacion', true);
 	}
 });
 
-
+$('#go_init').on('click', function(a){
+	a.preventDefault();
+	Backbone.history.navigate( 'estados' , true );	
+});
 $('#prev').on('click',  function(e){
 	e.preventDefault();
 	//navigate.prev_section();
@@ -216,8 +262,6 @@ $('.selected_calf').on('click', function(){
 	$('.selected').removeClass('on');
 	$(this).find('.selected').addClass('on');
 });
-
-
 
 $('.table-content, .content_table, .tip_content').rollbar();
 
@@ -229,7 +273,7 @@ $('.modal_button').on('click', function(){
 	$(this).addClass('active');
 });
 $('.close_modal').on('click', function(){
-	console.log('click');
+	//console.log('click');
     $('.modal_tip').fadeOut(500);
 });
 $('#link_tips').on('click', function(){
@@ -240,27 +284,33 @@ $('#link_tips').on('click', function(){
 
 $('.masterTooltip').tooltips();
 
-/*var sizeAdjust = function(){
-	var width = $(window).outerWidth();
-	var height = $(window).outerHeight();
-
-	if(height <= 730){
+var sizeAdjust = function(){
+	if(height <= 750){		
+		$('#container').animate({'top':'110px'}, 1000, 'expo');
 		$('.container_modal').css({'margin':'70px auto'});
-		$('#header-logo').css({
-
-		});
+		//$('#container').animate({'top':'85px'}, 1000 , 'expo');		
+		$('.header_background a img').css({'width':'150px'});
+		$('#header').css({'top':'0px'});
+		$('.header_background').css({'background-position':'0px -70px'});
+		$('#header-logo a').css({'width':'155px'});
+		$('.header_background').css({'height':'100px'});
+		$('#footer').css({'bottom':'-152px'});
+		$('.grass').css({'bottom':'-690px'});
+		$('.title_section').css({'bottom':'-790px'});
 	} else {
-
+		$('#footer').css({'bottom':'-10px'});
+		$('.grass').css({'bottom':'-540px'});
+		$('.title_section').css({'bottom':'-625px'});
 	}
-	if(width <= 980){
 
-	} else {
-
-	}
-};
+}
 
 $(window).resize(function(){
+	width = $(window).outerWidth();
+	height = $(window).outerHeight();
+
 	sizeAdjust();
+	console.log(height);
 });
 
-sizeAdjust();*/
+sizeAdjust();
