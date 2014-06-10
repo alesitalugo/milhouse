@@ -391,7 +391,8 @@ $('.link-menu').on('click',  function(e){
 });
 
 
-$('#stage').on('click', '.more_button', function(){
+$('#stage').on('click', '.more_button', function( e ){
+	e.preventDefault();
 	Backbone.history.navigate('resultados', true);
 });
 
