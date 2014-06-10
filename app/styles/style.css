@@ -114,8 +114,9 @@ a , a img {
 	margin: 20px auto;
 	clear: both;
 	position: relative;
-	top: 150px;
+	top: 10px;
 	opacity: 0;
+	cursor: pointer;
 }
 #header-logo a {
 	width: 266px;
