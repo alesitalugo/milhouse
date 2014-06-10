@@ -8,12 +8,19 @@ var SITE = (function(){
 	var actual_section = 'home';
 	var actual_estado = null;
 	var actual_municipio = null;
+	var actual_calif = null;
+	var actual_vivienda = null;
+	var actual_rango = null;
 
 	return{
 		'site_loaded': site_loaded,
 		'actual_section': actual_section,
 		'actual_estado': actual_estado,
 		'actual_municipio': actual_municipio,
+		'actual_calif': actual_calif,
+		'actual_vivienda': actual_vivienda,
+		'actual_rango': actual_rango,
+
 		global_sections: function(){
 			$('#header-logo').show();
 		},
@@ -82,17 +89,16 @@ var get_mapa_estado = function( estado ){
 				contentType : 'application/json',
 				url: '/api/'+estado+'.json',
 				beforeSend: function(){
-					console.log( '/api/'+estado+'.json' );
+					//console.log( '/api/'+estado+'.json' );
 				},
 				success: function(response){
-					var localidad_save = '';	
-					$('#menudos').data('menu', 'aaa');
-								
+					var localidad_save = '' ;	
+					$('#menudos').data('menu','aaa');								
 					var html_table = '';
 					var localidad = '';
 					var aproved_class = '';
 					_.each( response, function( value, key ){
-						aproved_class = ( value == 1 ) ? 'aproved' : '';
+						aproved_class = ( value === 1 ) ? 'aproved' : '';
 						//console.log(key);
 						var spaceout = key.split(' ').join('_');
 						//console.log(spaceout);
@@ -108,7 +114,7 @@ var get_mapa_estado = function( estado ){
 						
 
 						localidad = $(allitem).data('municipio');
-						console.log(localidad);
+						//console.log(localidad);
 					});	
 
 					localidad_save =  localidad;
@@ -127,15 +133,138 @@ var get_calificacion = function(){
 			resetAnimation();
 		},
 		success: function(response){
+			
 			//console.log(response);
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
-			SITE.rotate_circle('estado');
+			SITE.rotate_circle('calificacion');
 			SITE.actual_section = 'calificacion';
+			SITE.actual_calif = null;
+			var calif = null;
+			$('.selected_calf').on('click', function(){
+				$('.selected').removeClass('on');
+				$(this).find('.selected').addClass('on');
+				calif = $(this).data('calif');
+				//console.log(calif);
+				SITE.actual_calif = calif;				
+			});
 		}
 	});
 };
 
+var get_tipo_vivienda = function(){
+	$.ajax({
+		type: 'GET',
+		url:'/templates/template_vivienda.html',
+		beforeSend:function(){
+			console.log('loading');
+			resetAnimation();
+		} ,
+		success: function(response){
+			$('#home').hide();
+			$('#stage').html(response).fadeIn();
+			SITE.rotate_circle('vivienda');
+			SITE.actual_section = 'vivienda';
+
+			$('.item-tipovivienda').on('click', function(a){
+				$(this).addClass('on');
+				a.preventDefault();
+				var tipo = $(this).attr('id');
+				//console.log(tipo);
+				SITE.actual_vivienda = tipo;
+			});
+		}
+	});
+};
+
+var get_rango_precio = function(){
+	$.ajax({
+		type:'GET',
+		url:'/templates/template_precio.html',
+		beforeSend:function(){
+			//console.log('loading');
+			resetAnimation();
+		}, 
+		success: function(response){
+			$('#home').hide();
+			$('#stage').html(response).fadeIn();
+			SITE.rotate_circle('precio');
+			SITE.actual_section = 'precio';
+			SITE.actual_rango = null;
+			$('.price_item').on('click', function(a){
+				a.preventDefault();
+				$('.price_item').removeClass('on');
+				var rango_select = $(this).data('precio');
+				console.log(rango_select);
+				$(this).addClass('on');
+				SITE.actual_rango = rango_select;
+			});
+		}
+	});
+};
+
+var get_busqueda = function(){
+	$.ajax({
+		type:'GET',
+		url:'/templates/template_busqueda.html',
+		beforeSend: function(){
+			//console.log('loading');
+			resetAnimation();
+		}, 
+		success: function(response){
+			$('#home').hide();
+			$('#stage').html(response).fadeIn();
+			SITE.rotate_circle('resultados');
+			SITE.actual_section = 'resultados';
+			$('.content_table').rollbar();
+		}
+	});
+};	
+
+var get_grafica_resultados = function(){
+	$.ajax({
+		type:'GET',
+		url: '/templates/template_grafica.html',
+		beforeSend: function(){
+			//console.log('loading');
+			resetAnimation();
+		}, 
+		success: function(response){
+			$('#home').hide();
+			$('#stage').html(response).fadeIn();
+			SITE.rotate_circle('grafica');
+			SITE.actual_section = 'grafica';
+			var colors = [['#e9ebbf', '#cccc33'], ['#f4d9ae', '#ff9900'], ['#cce2e8', '#66cccc'], ['#e0e0e0', '#8ba3a6'], ['#eee0b1', '#cc9900']];
+            
+		    $('.round_graphic').each(function(){ 		    	
+		    	var num = $(this).find('.circle').data('percent');
+		    	$(this).find('.number').html(num+'<span>%</span>');
+		    });
+
+		    for (var i = 1; i <= 5; i++) {
+		        var child = document.getElementById('circles-' + i),
+		        	percentage = child.dataset.percent;
+		                    //$(child).find('.number').html(percentage);
+
+		                Circles.create({
+		                    id:         child.id,
+		                    percentage: percentage,
+		                    radius:     55,
+		                    width:      10,
+		                    number:     percentage ,
+		                    text:       '%',
+		                    colors:     colors[i - 1]
+		                });
+		            }
+
+		    if ($.browser.msie  && parseInt($.browser.version, 10) === 8) {
+		  		alert('IE8'); 
+			} else {
+		  		alert('Non IE8');
+			}
+		}
+	});
+};
 var show_section_home = function(){
 	$('#container').animate({'top':'250px'}, 1000 , 'expo');			
 	if(height<=800){
@@ -169,6 +298,11 @@ var AppRouter = Backbone.Router.extend({
 		'estados': 'ver_pais',
 		'estados/:estado': 'ver_estado',
 		'calificacion': 'ver_calificacion',
+		'vivienda': 'ver_vivienda',
+		'precio': 'ver_precio',
+		'busqueda': 'ver_busqueda',
+		'grafica': 'ver_grafica',
+
 	}
 });
 
@@ -186,6 +320,18 @@ app_router.on('route:ver_estado', function( estado ) {
 app_router.on('route:ver_calificacion', function( calificacion ){
 	get_calificacion(calificacion);
 
+});
+app_router.on('route:ver_vivienda', function(vivienda){
+	get_tipo_vivienda(vivienda);
+});
+app_router.on('route:ver_precio', function(precio){
+	get_rango_precio(precio);
+});
+app_router.on('route:ver_busqueda', function(busqueda){
+	get_busqueda(busqueda);
+});
+app_router.on('route:ver_grafica', function(grafica){
+	get_grafica_resultados(grafica);
 });
 Backbone.history.start({ pushState: true });
 $('#stage').on('click', '.home_link', function(a){
@@ -223,11 +369,13 @@ $('.link-menu').on('click',  function(e){
 });
 
 
+$('#stage').on('click', '.more_button', function(){
+	Backbone.history.navigate('grafica', true);
+});	
 
 $('#next').on('click', function(e){
 	e.preventDefault();
-	console.log( SITE.actual_section +' <3');
-	console.log(SITE.actual_municipio);
+	
 	if( SITE.actual_section === 'home'){	
 		Backbone.history.navigate( 'estados' , true );
 	}
@@ -247,8 +395,33 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate( 'calificacion', true);
 	} 
 	if(SITE.actual_section === 'calificacion'){
-		Backbone.history.navigate('calificacion', true);
+		console.log(SITE.actual_calif);
+		if(SITE.actual_calif === null){
+			alert('Selecciona una calificacion');
+			return 0;
+		}
+		Backbone.history.navigate('vivienda', true);
 	}
+	if(SITE.actual_section === 'vivienda'){
+		console.log(SITE.actual_vivienda);
+		if(SITE.actual_vivienda === null){
+			alert('Selecciona un tipo de vivienda');
+			return 0;
+		}
+		Backbone.history.navigate('precio', true);
+	}
+	if(SITE.actual_section === 'precio'){
+		if(SITE.actual_rango === null){
+			alert('selecciona un rango de precio');
+			return 0;
+		}
+		Backbone.history.navigate('busqueda', true);
+	}
+	if(SITE.actual_section === 'resultados'){
+		console.log('im in ');
+		Backbone.history.navigate('grafica', true);
+	}
+
 });
 
 $('#go_init').on('click', function(a){
@@ -304,7 +477,7 @@ var sizeAdjust = function(){
 		$('.title_section').css({'bottom':'-625px'});
 	}
 
-}
+};
 
 $(window).resize(function(){
 	width = $(window).outerWidth();
