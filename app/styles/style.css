@@ -1171,14 +1171,19 @@ a , a img {
 	top: -80px;
 	left: -42px;
 }
+#section_three{
+	position: relative;
+	top: 100px;
+}
 .botones_calificacion{
 	width: 199px;
-	margin: 20px auto;
+	margin: 0px auto;
+	padding: 0px;
 	text-align: center;
 }
 .item_calf{
 	list-style-type: none;
-	margin: 5px 0px;
+	padding: 2px 0px;
 }
 .selected_calf{
 	background: url(../images/new/spriteAverage01.png);

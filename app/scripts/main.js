@@ -8,6 +8,7 @@ var SITE = (function(){
 	var actual_section = 'home';
 	var actual_estado = null;
 	var actual_municipio = null;
+
 	return{
 		'site_loaded': site_loaded,
 		'actual_section': actual_section,
@@ -69,12 +70,11 @@ var get_mapa_estado = function( estado ){
 			console.log(estado);
 			$('#home').hide();
 			
-			$('#menudos').data('menu', 'aaa');
 			
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
 			SITE.actual_section = estado;
-			SITE.actual_municipio = '';
+			SITE.actual_estado = estado;
 
 			$.ajax({
 				type: 'GET',
@@ -84,12 +84,18 @@ var get_mapa_estado = function( estado ){
 					console.log( '/api/'+estado+'.json' );
 				},
 				success: function(response){
+					var localidad_save = '';	
+					$('#menudos').data('menu', 'aaa');
+								
 					var html_table = '';
 					var localidad = '';
 					var aproved_class = '';
 					_.each( response, function( value, key ){
 						aproved_class = ( value == 1 ) ? 'aproved' : '';
-						html_table += '<div class="item-localidad" data-municipio="'+key+'"><p>'+key+'</p><div class='+aproved_class+'></div></div>';
+						//console.log(key);
+						var spaceout = key.split(' ').join('_');
+						//console.log(spaceout);
+						html_table += '<div class="item-localidad" data-municipio="'+spaceout+'"><p>'+key+'</p><div class='+aproved_class+'></div></div>';
 					});
 
 					$('#stage #table_estate ').html( html_table );
@@ -98,12 +104,14 @@ var get_mapa_estado = function( estado ){
 						$('.item-localidad').removeClass('select_item');
 						var allitem = $(this).parent();
 						$(allitem).addClass('select_item');
+						
 
 						localidad = $(allitem).data('municipio');
-						//console.log(localidad);
+						console.log(localidad);
 					});	
-					SITE.actual_municipio =  localidad;
-					//console.log('im localidad', SITE.actual_municipio);
+
+					localidad_save =  localidad;
+					SITE.actual_municipio = localidad_save;
 				}
 			});
 		}
@@ -195,23 +203,30 @@ $('#stage').on('click', '#mexico_map path', function(){
 });
 
 $('#stage').on('click', '#Entidad path', function(){
+
 	SITE.actual_localidad = $(this).data('municipio');
-	console.log(SITE.actual_localidad);	
+
 	var map_municipio = document.querySelectorAll('#Entidad path');
 	_.each( map_municipio, function(path){
 		path.style.fill = '#84b13c';
 	});
 	this.style.fill = '#4d6d0c';
 });
+
+
 $('.link-menu').on('click',  function(e){
 	e.preventDefault();
 	var menu_link = $(this).data('menu');
 	console.log(menu_link);
 	Backbone.history.navigate(menu_link, true);
 });
+
+
+
 $('#next').on('click', function(e){
 	e.preventDefault();
-	//console.log( SITE.actual_section);
+	console.log( SITE.actual_section +' <3');
+	console.log(SITE.actual_municipio);
 	if( SITE.actual_section === 'home'){	
 		Backbone.history.navigate( 'estados' , true );
 	}
@@ -222,17 +237,13 @@ $('#next').on('click', function(e){
 		}
 		Backbone.history.navigate( 'estados/'+SITE.actual_estado, true );
 	}
-	if( SITE.actual_section === 'estado/'+SITE.actual_estado){
-		console.log(SITE.actual_localidad);		
-		if(SITE.actual_localidad == null){
+	if( SITE.actual_section === SITE.actual_estado){
+		console.log('im localidad', SITE.actual_municipio);	
+		if(SITE.actual_municipio === null){
 			alert('seleciona una localidad');
 			return 0;
-		}else if(SITE.actual_localidad === 'undefined'){
-			alert('selecciona una localidad');
-			return 0;
 		}
-		Backbone.history.navigate( 'calificacion');
-		//console.log('im in this condition');
+		Backbone.history.navigate( 'calificacion', true);
 	} 
 	if(SITE.actual_section === 'calificacion'){
 		Backbone.history.navigate('calificacion', true);
