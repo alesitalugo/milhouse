@@ -18,7 +18,7 @@ a , a img {
 	margin: 0px auto;
 	height: 290px;
 	position: relative;
-	top: 150px;
+	top: 20px;
 }
 .animate_intro .item_left{
 	float: left;
@@ -198,6 +198,7 @@ a , a img {
 	text-transform: uppercase;
 	text-align: center;
 	z-index: 900;
+	cursor: pointer;
 }
 #header .nav .menu-item .link-menu .icon{
 	margin: 0 auto;
@@ -647,6 +648,39 @@ a , a img {
 	height: 220px;
 	position: relative;
 }
+.item-localidad{
+	margin: 0px 0px 0px;
+	border-bottom: 1px solid #fff;
+	padding: 10px 0px 35px;
+	clear: both;
+	line-height: 30px;
+}
+.item-localidad p{
+	text-align: left;
+	color: #476501;
+	margin: 1em 0;
+	font-family: 'nilland-smallcapsregular';
+	font-size: 16px;
+	margin: 0;
+	padding:  0px;
+	float: left;
+}
+.aproved{
+	background-image: url('../images/desarrollo.png');
+	background-repeat: no-repeat;
+	width: 85px;
+	height: 25px;
+	display: block;
+	float: right;
+	margin: 5px;
+	cursor: pointer;
+}
+.select_item {
+	background: rgba(71, 101, 1, 0.21);
+}
+.select_item > p{
+	color: #fff;
+}
 .table-content .item-row{
 	width: 300px;
 	clear: both;
@@ -671,7 +705,7 @@ a , a img {
 	color: #476501;
 	margin: 1em 0;
     font-family: 'nilland-smallcapsregular';		
-    font-size: 18px;
+    font-size: 16px;
 }
 #section_two  .content .column {
 	float: left;
@@ -681,6 +715,8 @@ a , a img {
 	width: 400px;
 	float: right;
 	position: relative;
+	/*position: relative;*/
+	top: 70px;
 }
 .price_list{
 	width: 330px;

@@ -7,7 +7,7 @@ var sizeAdjust = function(){
 		
 		$('.container_modal').css({'margin':'70px auto'});
 		$('#container').animate({'top':'85px'}, 1000 , 'expo');		
-		$('.header_background a img').css({'width':'180px'});
+		$('.header_background a img').css({'width':'150px'});
 		$('#header').css({'top':'0px'});
 		$('.header_background').css({'background-position':'0px -50px'});
 		$('#header-logo a').css({'width':'190px'});
