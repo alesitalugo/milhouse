@@ -1,6 +1,6 @@
 'use strict';
 /* jshint camelcase: false */
-/* global Backbone, _, alert */
+/* global Backbone, _, alert, Circles */
 var width = $(window).outerWidth();
 var height = $(window).outerHeight();
 var SITE = (function(){
@@ -36,6 +36,25 @@ var SITE = (function(){
 	};
 }());
 
+var tooltips = function( svg ){
+	var paths = document.querySelectorAll( svg );
+	var tooltip_svg = document.querySelector('.tooltip_svg');
+	_.each( paths, function( path ){
+		path.onmouseover = function(){
+			tooltip_svg.innerHTML = path.dataset.estado;
+			tooltip_svg.style.display = 'inline-block';
+		};
+		path.onmouseout = function(){
+			tooltip_svg.style.display = 'none';
+		};
+		path.onmousemove = function (e) {
+			var x = e.clientX, y = e.clientY;
+			tooltip_svg.style.top = (y + 5) + 'px';
+			tooltip_svg.style.left = (x + 5) + 'px';
+		};
+	});
+};
+
 var resetAnimation = function(){
 	$('#container').css({'top':'-730px'});
 	/*	-webkit-transform: rotate(0deg);
@@ -58,7 +77,8 @@ var get_mapa_mexico = function(){
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('mapa');
 			SITE.actual_section	= 'estados';
-			
+
+			tooltips( '#stage #mexico_map path' );
 
 		}
 	});
@@ -91,8 +111,8 @@ var get_mapa_estado = function( estado ){
 					//console.log( '/api/'+estado+'.json' );
 				},
 				success: function(response){
-					var localidad_save = '' ;	
-					$('#menudos').data('menu','aaa');								
+					var localidad_save = '' ;
+					$('#menudos').data('menu','aaa');
 					var html_table = '';
 					var localidad = '';
 					var aproved_class = '';
@@ -114,7 +134,7 @@ var get_mapa_estado = function( estado ){
 
 						localidad = $(allitem).data('municipio');
 						//console.log(localidad);
-					});	
+					});
 
 					localidad_save =  localidad;
 					SITE.actual_municipio = localidad_save;
@@ -145,7 +165,7 @@ var get_calificacion = function(){
 				$(this).find('.selected').addClass('on');
 				calif = $(this).data('calif');
 				//console.log(calif);
-				SITE.actual_calif = calif;				
+				SITE.actual_calif = calif;
 			});
 		}
 	});
@@ -183,7 +203,7 @@ var get_rango_precio = function(){
 		beforeSend:function(){
 			//console.log('loading');
 			resetAnimation();
-		}, 
+		},
 		success: function(response){
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
@@ -209,7 +229,7 @@ var get_busqueda = function(){
 		beforeSend: function(){
 			//console.log('loading');
 			resetAnimation();
-		}, 
+		},
 		success: function(response){
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
@@ -218,7 +238,7 @@ var get_busqueda = function(){
 			$('.content_table').rollbar();
 		}
 	});
-};	
+};
 
 var get_grafica_resultados = function(){
 	$.ajax({
@@ -227,7 +247,7 @@ var get_grafica_resultados = function(){
 		beforeSend: function(){
 			//console.log('loading');
 			resetAnimation();
-		}, 
+		},
 		success: function(response){
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
@@ -235,39 +255,36 @@ var get_grafica_resultados = function(){
 			SITE.actual_section = 'grafica';
 			var colors = [['#e9ebbf', '#cccc33'], ['#f4d9ae', '#ff9900'], ['#cce2e8', '#66cccc'], ['#e0e0e0', '#8ba3a6'], ['#eee0b1', '#cc9900']];
             
-		    $('.round_graphic').each(function(){ 		    	
-		    	var num = $(this).find('.circle').data('percent');
-		    	$(this).find('.number').html(num+'<span>%</span>');
+		    $('.round_graphic').each(function(){
+				var num = $(this).find('.circle').data('percent');
+				$(this).find('.number').html(num+'<span>%</span>');
 		    });
 
 		    for (var i = 1; i <= 5; i++) {
-		        var child = document.getElementById('circles-' + i),
-		        	percentage = child.dataset.percent;
-		                    //$(child).find('.number').html(percentage);
-
-		                Circles.create({
-		                    id:         child.id,
-		                    percentage: percentage,
-		                    radius:     55,
-		                    width:      10,
-		                    number:     percentage ,
-		                    text:       '%',
-		                    colors:     colors[i - 1]
-		                });
-		            }
+		        var child = document.getElementById('circles-' + i), percentage = child.dataset.percent;
+		        Circles.create({
+					id: child.id,
+					percentage: percentage,
+					radius: 55,
+					width: 10,
+					number: percentage,
+					text: '%',
+					colors: colors[i - 1]
+		        });
+		    }
 
 		    if ($.browser.msie  && parseInt($.browser.version, 10) === 8) {
-		  		alert('IE8'); 
+				alert('IE8');
 			} else {
-		  		alert('Non IE8');
+				alert('Non IE8');
 			}
 		}
 	});
 };
 var show_section_home = function(){
-	$('#container').animate({'top':'250px'}, 1000 , 'expo');			
+	$('#container').animate({'top':'250px'}, 1000 , 'expo');
 	if(height<=800){
-		$('#container').animate({'top':'85px'}, 1000 , 'expo');			
+		$('#container').animate({'top':'85px'}, 1000 , 'expo');
 	}
 	$('#stage').hide();
 	$('#home').fadeIn();
@@ -370,12 +387,12 @@ $('.link-menu').on('click',  function(e){
 
 $('#stage').on('click', '.more_button', function(){
 	Backbone.history.navigate('grafica', true);
-});	
+});
 
 $('#next').on('click', function(e){
 	e.preventDefault();
 	
-	if( SITE.actual_section === 'home'){	
+	if( SITE.actual_section === 'home'){
 		Backbone.history.navigate( 'estados' , true );
 	}
 	if( SITE.actual_section === 'estados'){
@@ -386,13 +403,13 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate( 'estados/'+SITE.actual_estado, true );
 	}
 	if( SITE.actual_section === SITE.actual_estado){
-		console.log('im localidad', SITE.actual_municipio);	
+		console.log('im localidad', SITE.actual_municipio);
 		if(SITE.actual_municipio === null){
 			alert('seleciona una localidad');
 			return 0;
 		}
 		Backbone.history.navigate( 'calificacion', true);
-	} 
+	}
 	if(SITE.actual_section === 'calificacion'){
 		console.log(SITE.actual_calif);
 		if(SITE.actual_calif === null){
@@ -425,7 +442,7 @@ $('#next').on('click', function(e){
 
 $('#go_init').on('click', function(a){
 	a.preventDefault();
-	Backbone.history.navigate( 'estados' , true );	
+	Backbone.history.navigate( 'estados' , true );
 });
 $('#prev').on('click',  function(e){
 	e.preventDefault();
@@ -458,7 +475,7 @@ $('#link_tips').on('click', function(){
 $('.masterTooltip').tooltips();
 
 var sizeAdjust = function(){
-	if(height <= 750){		
+	if(height <= 750){
 		$('#container').animate({'top':'110px'}, 1000, 'expo');
 		$('.container_modal').css({'margin':'70px auto'});
 		//$('#container').animate({'top':'85px'}, 1000 , 'expo');		

@@ -2,5 +2,15 @@
 	cursor: pointer;
 }
 #mexico_map path:hover{
-	background: red;
+	fill: #4d6d0c !important;
+}
+.tooltip_svg{
+	position: absolute;
+	display: none;
+	background: #4d6d0c;
+	color: white;
+	font-size: 13px;
+	padding: 5px 10px;
+	border-radius: 3px;
+	text-align: center;
 }
