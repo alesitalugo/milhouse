@@ -51,7 +51,8 @@ var get_mapa_mexico = function(){
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('mapa');
 			SITE.actual_section	= 'estados';
-			
+
+			tooltips( '#stage #mexico_map path' );
 
 		}
 	});
