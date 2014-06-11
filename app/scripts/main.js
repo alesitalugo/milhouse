@@ -104,7 +104,7 @@ var wonder_cities_power_activate = function( municipios ){
 	var paths = document.querySelectorAll( '#stage #Entidad path' );
 	_.each( municipios, function( municipio ){
 		_.each( paths, function( path ){
-			if ( path.dataset.municipio === municipio ){
+			if ( path.getAttribute('data-municipio') === municipio ){
 				path.setAttribute('class', 'path_active');
 			}
 		});
@@ -172,6 +172,7 @@ var get_mapa_estado = function( estado ){
 						}
 						html_table += '<div class="item-localidad" data-municipio="'+spaceout+'"><p>'+key+'</p><div class='+aproved_class+'></div></div>';
 					});
+
 					wonder_cities_power_activate( municipios_calidad );
 					$('#stage #table_estate ').html( html_table );
 					$('.table-content').rollbar();
