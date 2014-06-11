@@ -31,15 +31,13 @@ var SITE = (function(){
 			$('.grass').rotate({angle: 0,
             animateTo:180}, 'expo');
 			$('.title_section').rotate({angle: -360,
-            animateTo:0,
-            callback: function(){    }}, 'expo');
+            animateTo:0}, 'expo');
 		},
 		rotate_circle_prev:function(){
 			$('.grass').rotate({angle: 0,
             animateTo:-180}, 'expo');
 			$('.title_section').rotate({angle: 360,
-            animateTo:0,
-            callback: function(){    }}, 'expo');
+            animateTo:0},'expo');
 		},
 		rotate_circle: function( section ){
 			
@@ -65,9 +63,6 @@ var SITE = (function(){
 	});
 
 };*/
-
-
-
 
 var tooltips = function( svg, tipo ){
 	var paths = document.querySelectorAll( svg );
