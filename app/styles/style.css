@@ -465,7 +465,7 @@ a , a img {
 /*ADD TITLES SECTION*/
 
 
-.title_section .intro{
+.title_section .home{
 	background: url(../images/new/titles/title_p01.png);
 }
 .title_section .mapa{
@@ -1369,11 +1369,12 @@ a.buttons_item:hover > .icon{
 	text-align: left;
 	margin: 10px 0px;
 }
-.modal_title h2{
+.modal_title h2, .tips_content_modal h2{
 	margin: 0;
 	font-family: 'nilland-smallcapsbold';
 	font-size: 36px;
 	color: #496b04;
+	text-align: left;
 }
 .modal_title p{
 	margin: 0;
@@ -1468,6 +1469,13 @@ a.buttons_item:hover > .icon{
 .description_tip{
 
 }
+.tip_modal{
+	display: none;
+}
+.active_modal{
+	display: block;
+}
+
 #modal_nav{
 	position: absolute;
 	top: -50px;
@@ -1531,20 +1539,22 @@ a.buttons_item:hover > .icon{
     -o-transition: opacity 0.1s ease-out;
     transition: opacity 0.1s ease-out;
 }
-.modal_title .description_tip {
+.description_tip {
 	background: #84b23d;
 	margin: 10px 0;
-	padding: 10px ;
+	padding: 0px ;
 	border-radius: 15px;
 	-webkit-border-radius:15px;
 	-moz-border-radius:15px;
 	-o-border-radius:15px;
 	-ms-border-radius:15px;
 }
-.modal_title .description_tip p{
+.description_tip p{
 	font-family: 'nilland-smallcapsbold';
 	font-size: 14px;
 	color: #fff;
+	padding: 10px;
+	text-align: left;
 }
 .tip_content{
 	height: 350px;

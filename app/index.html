@@ -191,49 +191,93 @@
                         <div class="content">
                            <div id="modal_box" class="modal_box modal_tip">
                                 <div class="container_modal">
-                                    <div class="content_modal" data-modal="tips">
+                                    <div class="content_modal tips_content_modal" data-modal="tips">
                                         <a id="close_modal" class="close_modal_tips"></a>
                                         <ul id="modal_nav">
                                             <li class="modal_nav_item">
-                                                <a href="#" class="modal_button active" id="agua_modal">
+                                                <a href="#" class="modal_button active" data-show-modal="agua">
                                                     agua
                                                 <span class="guide_active"></span>                                                    
                                                 </a>
                                             </li>
                                             <li class="modal_nav_item">
-                                                <a href="#" class="modal_button" id="gas_modal">
+                                                <a href="#" class="modal_button" data-show-modal="gas">
                                                     gas
                                                 <span class="guide_active"></span>                                                    
                                                 </a>
                                             </li>
                                             <li class="modal_nav_item">
-                                                <a href="#" class="modal_button" id="salud_modal">
+                                                <a href="#" class="modal_button" data-show-modal="salud">
                                                     salud
                                                 <span class="guide_active"></span>                                                    
                                                 </a>
                                             </li>
                                             <li class="modal_nav_item">
-                                                <a href="#" class="modal_button" id="luz_modal">
+                                                <a href="#" class="modal_button" data-show-modal="luz">
                                                     luz
                                                 <span class="guide_active"></span>                                                    
                                                 </a>
                                             </li>
-                                        </ul>                                   
-                                        <div class="modal_title">
-                                            <h2>TiPS</h2>
+                                        </ul>                                                          
+                                        <h2>TiPS</h2>
+                                        <div class="tip_modal tips_agua active_modal" id="tips_agua">
                                             <div class="description_tip">
                                                 <p>Inst. Hidraulica</p>
+                                            </div>                                       
+                                            <div id="tip_content">
+                                                <div class="tip_content">
+                                                    <div class="text_tip">
+                                                        <p>Revisa que la instalación de hidráulica de tu vivienda no presente fugas o deterioro en las tuberías. -Conoce tu consumo actual de agua y contrástalo con el consumo domestico promedio por habitante para tu localidad, te servirá para saber que tan buenos o malos son tus hábitos de consumo. -Si has aplicado medidas de ahorro, verifica tu consumo mensual con los recibos de agua para saber si las medidas que tomaste son las correctas</p>
+                                                    </div>
+                                                    <div class="tip_image">
+                                                        <img src="/images/new/tips01.png">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                       
-                                        <div id="tip_content">
-                                            <div class="tip_content">
-                                                <div class="text_tip">
-                                                <p>Revisa que la instalación de hidráulica de tu vivienda no presente fugas o deterioro en las tuberías. -Conoce tu consumo actual de agua y contrástalo con el consumo domestico promedio por habitante para tu localidad, te servirá para saber que tan buenos o malos son tus hábitos de consumo. -Si has aplicado medidas de ahorro, verifica tu consumo mensual con los recibos de agua para saber si las medidas que tomaste son las correctas</p>
+                                        <div class="tip_modal tips_gas" id="tips_gas">
+                                            <div class="description_tip">
+                                                <p>Calentador Solar</p>
+                                            </div>                                       
+                                            <div id="tip_content">
+                                                <div class="tip_content">
+                                                    <div class="text_tip">
+                                                        <p>Revisa que la instalación de hidráulica de tu vivienda no presente fugas o deterioro en las tuberías. -Conoce tu consumo actual de agua y contrástalo con el consumo domestico promedio por habitante para tu localidad, te servirá para saber que tan buenos o malos son tus hábitos de consumo. -Si has aplicado medidas de ahorro, verifica tu consumo mensual con los recibos de agua para saber si las medidas que tomaste son las correctas</p>
+                                                    </div>
+                                                    <div class="tip_image">
+                                                        <img src="/images/new/tips01.png">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="tip_image">
-                                                <img src="/images/new/tips01.png">
+                                        </div>
+                                        <div class="tip_modal tips_salud" id="tips_salud">
+                                            <div class="description_tip">
+                                                <p>Economizador pañales</p>
+                                            </div>                                       
+                                            <div id="tip_content">
+                                                <div class="tip_content">
+                                                    <div class="text_tip">
+                                                        <p>Revisa que la instalación de hidráulica de tu vivienda no presente fugas o deterioro en las tuberías. -Conoce tu consumo actual de agua y contrástalo con el consumo domestico promedio por habitante para tu localidad, te servirá para saber que tan buenos o malos son tus hábitos de consumo. -Si has aplicado medidas de ahorro, verifica tu consumo mensual con los recibos de agua para saber si las medidas que tomaste son las correctas</p>
+                                                    </div>
+                                                    <div class="tip_image">
+                                                        <img src="/images/new/tips01.png">
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="tip_modal tips_luz" id="tips_luz">
+                                            <div class="description_tip">
+                                                <p>Inst. Eléctrica</p>
+                                            </div>                                       
+                                            <div id="tip_content">
+                                                <div class="tip_content">
+                                                    <div class="text_tip">
+                                                        <p>Si has aplicado medidas de ahorro, verifica tu consumo mensual con los recibos de agua para saber si las medidas que tomaste son las correctas</p>
+                                                    </div>
+                                                    <div class="tip_image">
+                                                        <img src="">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -245,7 +289,7 @@
             </div>
             <div id="round">     
                 <div class="title_section">
-                    <div id="add_title" class="intro">
+                    <div id="add_title" class="home">
                     </div>
                 </div>
                 <div class="grass"></div>                                           

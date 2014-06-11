@@ -33,7 +33,7 @@ var SITE = (function(){
 			if( option === 'show' ){
 				_.each( pills, function( pill ){
 					if( show_pills ){
-						$(pill).show();
+						$(pill).fadeIn();
 					}
 					if ( pill.firstElementChild.dataset.menu === section ){
 						show_pills = false;
@@ -45,7 +45,7 @@ var SITE = (function(){
 				show_pills = false;
 				_.each( pills.get().reverse(), function( pill ){
 					if( !show_pills ){
-						$(pill).hide();
+						$(pill).fadeOut();
 					}
 					if( section !== 'home' ){
 						if ( pill.firstElementChild.dataset.menu === section ){
@@ -79,18 +79,6 @@ var SITE = (function(){
 		}
 	};
 }());
-
-/*var button_menu = function(section){
-	var active_button = $('#button_'+section);
-	$(active_button).addClass('menuon');
-	var buttons = 0;
-	$('.nav .menu-item').each(function(){
-		var name_button = $(active_button).attr('id');
-		buttons++;
-		console.log(buttons, name_button);
-	});
-
-};*/
 
 var tooltips = function( svg, tipo ){
 	var paths = document.querySelectorAll( svg );
@@ -342,7 +330,7 @@ var get_materiales = function(){
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('materiales');
 			SITE.actual_section = 'materiales';
-			$('.table-content').rollbar();
+			//$('.table-content').rollbar();
 			$('.menu-item').addClass('menuon');
 		}
 	});
@@ -442,6 +430,11 @@ Backbone.history.start({ pushState: true });
 $('#header-logo').on('click', '.home_link', function(a){
 	a.preventDefault();
 	SITE.take_pills( 'home', 'hide' );
+	SITE.actual_section = 'home';
+	$('#next').fadeIn(500);
+	SITE.rotate_circle_next();
+	SITE.rotate_circle('home');
+	$('#prev').fadeOut(500);
 	Backbone.history.navigate('', true);
 	return false;
 });
@@ -566,10 +559,14 @@ $('#prev').on('click', function(e){
 		Backbone.history.navigate('estados', true);
 	}
 	if(SITE.actual_section === 'estados'){
-		Backbone.history.navigate('home', true);
+		SITE.rotate_circle('home');
+		SITE.actual_section = 'home';
+		Backbone.history.navigate('', true);
+
 	}
 
 });
+
 $('.selected_calf').on('click', function(){
 	$('.selected').removeClass('on');
 	$(this).find('.selected').addClass('on');
@@ -587,7 +584,12 @@ $('#stage').on('click', '.buttons_item', function(a){
 $('.modal_button').on('click', function(){
 	$('.modal_button').removeClass('active');
 	$(this).addClass('active');
+
 	$('.tip_content').rollbar();
+	$('.tip_modal').removeClass('active_modal');
+	var is_modal = $(this).data('show-modal');
+	$('#tips_'+is_modal).addClass('active_modal');
+
 });
 
 $('.close_modal_tips').on('click', function(){
