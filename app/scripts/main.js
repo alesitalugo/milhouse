@@ -390,6 +390,7 @@ $('#stage').on('click', '#Entidad path', function(){
 	});
 	if( this.hasAttribute('class') ){
 		var table_items = $('#stage #table_estate .item-localidad');
+		table_items.removeClass('select_item');
 		var municipio = this.dataset.municipio;
 		this.style.fill = '#4d6d0c';
 		_.each( table_items, function( table_item ){
