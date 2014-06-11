@@ -1,8 +1,21 @@
 'use strict';
 /* jshint camelcase: false */
 /* global Backbone, _, alert, Circles */
-var width = $(window).outerWidth();
 var height = $(window).outerHeight();
+var resetAnimation = function(){
+	$('#container').css({'top':'-730px'});
+	$('.grass').rotate({animateTo:0});
+	$('.title_section').rotate({animateTo: 0});
+	console.log('reset');
+};
+var rotate_circle_next = function(){
+	console.log('rotate');
+	
+};
+/*var rotate_circle_prev = function(){
+	$('.grass').rotate({animateTo: -180}, 'expo');
+	$('.title_section').rotate({animateTo: -360}, 'expo');
+};*/
 var SITE = (function(){
 	var site_loaded = false;
 	var actual_section = 'home';
@@ -25,12 +38,16 @@ var SITE = (function(){
 			$('#header-logo').show();
 		},
 		rotate_circle: function( section ){
-			$('.grass').rotate({animateTo: 180}, 3000, 'expo');
-			$('.title_section').rotate({animateTo: 360}, 3000, 'expo');
+			$('.grass').rotate({animateTo: 180}, 'expo');
+			$('.title_section').rotate({animateTo: 360}, 'expo');
+			console.log('round');
 			$('#add_title').removeClass().addClass(section);
-
 			$('#button_'+section).fadeIn();
-			$('#container').animate({'top':'170px'}, 1000 , 'expo');
+			if(height <= 720){
+				$('#container').animate({'top':'90px'}, 1000, 'expo');
+			} else {
+				$('#container').animate({'top':'170px'}, 1000 , 'expo');
+			}
 		}
 	};
 }());
@@ -66,11 +83,6 @@ var wonder_cities_power_activate = function( municipios ){
 	});
 };
 
-var resetAnimation = function(){
-	$('#container').css({'top':'-730px'});
-	$('.grass').rotate({animateTo:0});
-	$('.title_section').rotate({animateTo: 0});
-};
 
 /***** AJAX REQUEST ***/
 var get_mapa_mexico = function(){
@@ -160,7 +172,6 @@ var get_calificacion = function(){
 		type: 'GET',
 		url: '/templates/template_calificacion.html',
 		beforeSend: function(){
-			resetAnimation();
 		},
 		success: function(response){
 			//console.log(response);
@@ -186,7 +197,6 @@ var get_tipo_vivienda = function(){
 		type: 'GET',
 		url:'/templates/template_vivienda.html',
 		beforeSend:function(){
-			resetAnimation();
 		},
 		success: function(response){
 			$('#home').hide();
@@ -210,7 +220,6 @@ var get_rango_precio = function(){
 		type:'GET',
 		url:'/templates/template_precio.html',
 		beforeSend:function(){
-			resetAnimation();
 		},
 		success: function(response){
 			$('#home').hide();
@@ -235,7 +244,6 @@ var get_busqueda = function(){
 		type:'GET',
 		url:'/templates/template_busqueda.html',
 		beforeSend: function(){
-			resetAnimation();
 		},
 		success: function(response){
 			$('#home').hide();
@@ -252,7 +260,6 @@ var get_grafica_resultados = function(){
 		type:'GET',
 		url: '/templates/template_grafica.html',
 		beforeSend: function(){
-			resetAnimation();
 		},
 		success: function(response){
 			$('#home').hide();
@@ -286,7 +293,6 @@ var get_materiales = function(){
 		type:'GET',
 		url:'templates/template_materiales.html',
 		beforeSend: function(){
-			resetAnimation();
 		},
 		success: function(response){
 			$('#home').hide();
@@ -368,6 +374,7 @@ app_router.on('route:ver_materiales', function(materiales){
 	get_materiales(materiales);
 });
 Backbone.history.start({ pushState: true });
+
 $('#stage').on('click', '.home_link', function(a){
 	a.preventDefault();
 
@@ -414,7 +421,10 @@ $('#stage').on('click', '.more_button', function( e ){
 	e.preventDefault();
 	Backbone.history.navigate('resultados', true);
 });
-
+$('#go_init').on('click', function(a){
+	a.preventDefault();
+	Backbone.history.navigate( 'estados' , true );
+});
 $('#next').on('click', function(e){
 	e.preventDefault();
 	if( SITE.actual_section === 'home'){
@@ -428,7 +438,6 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate( 'estados/'+SITE.actual_estado, true );
 	}
 	if( SITE.actual_section === SITE.actual_estado){
-		console.log('im localidad', SITE.actual_municipio);
 		if(SITE.actual_municipio === null){
 			alert('seleciona una localidad');
 			return 0;
@@ -436,7 +445,6 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate( 'calificacion', true);
 	}
 	if(SITE.actual_section === 'calificacion'){
-		console.log(SITE.actual_calif);
 		if(SITE.actual_calif === null){
 			alert('Selecciona una calificacion');
 			return 0;
@@ -452,7 +460,6 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate('vivienda', true);
 	}
 	if(SITE.actual_section === 'vivienda'){
-		console.log(SITE.actual_vivienda);
 		if(SITE.actual_vivienda === null){
 			alert('Selecciona un tipo de vivienda');
 			return 0;
@@ -460,7 +467,6 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate('busqueda', true);
 	}
 	if(SITE.actual_section === 'resultados'){
-		console.log('im in ');
 		Backbone.history.navigate('resultados', true);
 	}
 	if(SITE.actual_section === 'resultados'){
@@ -468,13 +474,33 @@ $('#next').on('click', function(e){
 	}
 });
 
-$('#go_init').on('click', function(a){
-	a.preventDefault();
-	Backbone.history.navigate( 'estados' , true );
-});
-$('#prev').on('click',  function(e){
+$('#prev').on('click', function(e){
 	e.preventDefault();
-	//navigate.prev_section();
+
+	console.log(SITE.actual_section);
+	if(SITE.actual_section === 'materiales'){
+		Backbone.history.navigate('resultados', true);
+		console.log(SITE.actual_section);
+	}
+	if(SITE.actual_section === 'resultados'){
+		Backbone.history.navigate('busqueda', true);
+	}
+	if(SITE.actual_section === 'busqueda'){
+		Backbone.history.navigate('vivienda', true);
+	}
+	if(SITE.actual_section === 'vivienda'){
+		Backbone.history.navigate('precio', true);
+	}
+	if(SITE.actual_section === 'precio'){
+		Backbone.history.navigate('calificacion', true);
+	}
+	if(SITE.actual_section === 'calificacion', true){
+		Backbone.history.navigate('estados', true);
+	}
+	/*if(SITE.actual_section === 'estados'){
+		Backbone.history.navigate('home', true);
+	}*/
+
 });
 $('.selected_calf').on('click', function(){
 	$('.selected').removeClass('on');
@@ -482,17 +508,21 @@ $('.selected_calf').on('click', function(){
 });
 
 $('.table-content, .content_table, .tip_content').rollbar();
-
-
 $('.grass').rotate({animateTo: 180}, 100, 'expo');
 $('.title_section').rotate({animateTo:360}, 300, 'expo');
+
+$('#stage').on('click', '.buttons_item', function(a){
+	a.preventDefault();
+	console.log('modal');
+	$('.modal_caracteristicas').fadeIn(500);
+});
+
 $('.modal_button').on('click', function(){
 	$('.modal_button').removeClass('active');
 	$(this).addClass('active');
 });
-$('.close_modal').on('click', function(){
-	//console.log('click');
-    $('.modal_tip').fadeOut(500);
+$('#close_modal').on('click', function(){
+	$('#modal_box').fadeOut(500);
 });
 $('#link_tips').on('click', function(){
 	$('.modal_tip').fadeIn(500, function(){
@@ -504,10 +534,6 @@ $('.masterTooltip').tooltips();
 
 var sizeAdjust = function(){
 	if(height <= 750){
-		console.log('resize function active');
-		$('#container').animate({'top':'65px'}, 1000, 'expo');
-		$('.container_modal').css({'margin':'70px auto'});
-		//$('#container').animate({'top':'85px'}, 1000 , 'expo');		
 		$('.header_background a img').css({'width':'150px'});
 		$('#header').css({'top':'0px'});
 		$('.header_background').css({'background-position':'0px -70px'});
@@ -517,6 +543,7 @@ var sizeAdjust = function(){
 		$('.grass').css({'bottom':'-680px'});
 		$('.title_section').css({'bottom':'-760px'});
 		$('.nav_menu .arrow').css({'top':'-55px'});
+		$('.container_modal').css({'margin':'170px auto'});
 	} else {
 		$('#footer').css({'bottom':'-10px'});
 		$('.grass').css({'bottom':'-540px'});
@@ -526,11 +553,7 @@ var sizeAdjust = function(){
 };
 
 $(window).resize(function(){
-	width = $(window).outerWidth();
-	height = $(window).outerHeight();
-
 	sizeAdjust();
-	console.log(height);
 });
 
 sizeAdjust();
