@@ -68,20 +68,34 @@ a , a img {
 	top: 55px;
 	left: 46px;
 	height: 0px;
+
+}
+.plants{
+	height: 160px;
+	position: relative;
+	top: -204px;
+	width: 0;
+	float: right;
+	left: -58px;
+	opacity: 0;
+
 }
 .line_home{
 	height: 0px;
+	float: left;
 }
 #line{
 	float: left;
 	width: 160px;
 	position: relative;
+	height: 270px;
 }
 #header-logo{
 	position: fixed;
 	width: 100%;
 	height: auto;
 	z-index: 1000;
+	/*top: -200px;*/
 }
 .header_background{
 	width: 874px;
@@ -91,14 +105,6 @@ a , a img {
 	position: relative;
 	z-index: 1;
 	background-repeat: no-repeat;
-}
-#header-logo a {
-	width: 266px;
-	height: 119px;
-	/*-webkit-transform: scale(0.9);
-	-moz-transform: scale(0.9);
-	-ms-transform: scale(0.9);
-	transform: scale(0.9);*/
 }
 #header-logo a:hover {
 	/*-webkit-transform: scale(0.93);
@@ -1920,4 +1926,19 @@ top: 48px;
 		transform: scale(1.5);
 		opacity: 0;
 	}
+}
+
+.rotate{
+	-webkit-transform: rotate(0deg);
+	-webkit-transform-origin: 50% 50%;
+	transform: rotate(0deg);
+	transform-origin: 50% 50%;
+
+}
+.round {
+	-webkit-transform:rotate(360deg);
+	-webkit-transform-origin:50% 50%;
+	transform: rotate(360deg);
+	transform-origin:(50% 50%);
+
 }
