@@ -265,6 +265,21 @@ var get_grafica_resultados = function(){
 		}
 	});
 };
+var get_materiales = function(){
+	$.ajax({
+		type:'GET',
+		url:'templates/template_materiales.html',
+		beforeSend: function(){
+			resetAnimation();
+		},
+		success: function(response){
+			$('#home').hide();
+			$('#stage').html(response).fadeIn();
+			SITE.rotate_circle('materiales');
+			SITE.actual_section = 'materiales';
+		}
+	});
+};
 var show_section_home = function(){
 	$('#container').animate({'top':'250px'}, 1000 , 'expo');
 	if(height<=800){
@@ -302,7 +317,7 @@ var AppRouter = Backbone.Router.extend({
 		'precio': 'ver_precio',
 		'busqueda': 'ver_busqueda',
 		'resultados': 'ver_resultados',
-
+		'materiales':'ver_materiales',
 	}
 });
 
@@ -332,6 +347,9 @@ app_router.on('route:ver_busqueda', function(busqueda){
 });
 app_router.on('route:ver_resultados', function(resultados){
 	get_grafica_resultados(resultados);
+});
+app_router.on('route:ver_materiales', function(materiales){
+	get_materiales(materiales);
 });
 Backbone.history.start({ pushState: true });
 $('#stage').on('click', '.home_link', function(a){
@@ -421,7 +439,9 @@ $('#next').on('click', function(e){
 		console.log('im in ');
 		Backbone.history.navigate('resultados', true);
 	}
-
+	if(SITE.actual_section === 'resultados'){
+		Backbone.history.navigate('materiales', true);
+	}
 });
 
 $('#go_init').on('click', function(a){
