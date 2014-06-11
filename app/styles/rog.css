@@ -1,4 +1,6 @@
-#Entidad path{}
+#Entidad path{
+	cursor: not-allowed;
+}
 #Entidad path.path_active{
 	fill: #84b13c;
 	cursor: pointer;
