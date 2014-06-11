@@ -35,12 +35,13 @@ var SITE = (function(){
 	};
 }());
 
-var tooltips = function( svg ){
+var tooltips = function( svg, tipo ){
 	var paths = document.querySelectorAll( svg );
 	var tooltip_svg = document.querySelector('.tooltip_svg');
 	_.each( paths, function( path ){
 		path.onmouseover = function(){
-			tooltip_svg.innerHTML = path.dataset.estado;
+			var tooltip_text = ( tipo === 'estados') ? path.dataset.estado : path.dataset.municipio;
+			tooltip_svg.innerHTML = tooltip_text;
 			tooltip_svg.style.display = 'inline-block';
 		};
 		path.onmouseout = function(){
@@ -51,6 +52,17 @@ var tooltips = function( svg ){
 			tooltip_svg.style.top = (y + 5) + 'px';
 			tooltip_svg.style.left = (x + 5) + 'px';
 		};
+	});
+};
+
+var wonder_cities_power_activate = function( municipios ){
+	var paths = document.querySelectorAll( '#stage #Entidad path' );
+	_.each( municipios, function( municipio ){
+		_.each( paths, function( path ){
+			if ( path.dataset.municipio === municipio ){
+				path.style.fill = '#84b13c';
+			}
+		});
 	});
 };
 
@@ -75,7 +87,7 @@ var get_mapa_mexico = function(){
 			SITE.rotate_circle('mapa');
 			SITE.actual_section	= 'estados';
 
-			tooltips( '#stage #mexico_map path' );
+			tooltips( '#stage #mexico_map path', 'estados' );
 
 		}
 	});
@@ -98,6 +110,8 @@ var get_mapa_estado = function( estado ){
 			SITE.actual_section = estado;
 			SITE.actual_estado = estado;
 
+			tooltips( '#stage #Entidad path', 'municipios' );
+
 			$.ajax({
 				type: 'GET',
 				contentType : 'application/json',
@@ -111,22 +125,24 @@ var get_mapa_estado = function( estado ){
 					var html_table = '';
 					var localidad = '';
 					var aproved_class = '';
+					var municipios_calidad = [];
 					_.each( response, function( value, key ){
-						aproved_class = ( value === 1 ) ? 'aproved' : '';
-						//console.log(key);
 						var spaceout = key.split(' ').join('_');
-						//console.log(spaceout);
+						if( value === 1 ){
+							aproved_class = 'aproved';
+							municipios_calidad.push( spaceout.toLowerCase() );
+						} else {
+							aproved_class = '';
+						}
 						html_table += '<div class="item-localidad" data-municipio="'+spaceout+'"><p>'+key+'</p><div class='+aproved_class+'></div></div>';
 					});
-
+					wonder_cities_power_activate( municipios_calidad );
 					$('#stage #table_estate ').html( html_table );
 					$('.table-content').rollbar();
 					$('.aproved').on('click', function(){
 						$('.item-localidad').removeClass('select_item');
 						var allitem = $(this).parent();
 						$(allitem).addClass('select_item');
-						
-
 						localidad = $(allitem).data('municipio');
 						//console.log(localidad);
 					});
@@ -387,7 +403,8 @@ $('.link-menu').on('click',  function(e){
 });
 
 
-$('#stage').on('click', '.more_button', function(){
+$('#stage').on('click', '.more_button', function( e ){
+	e.preventDefault();
 	Backbone.history.navigate('resultados', true);
 });
 
