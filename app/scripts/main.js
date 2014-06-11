@@ -116,7 +116,7 @@ var wonder_cities_power_activate = function( municipios ){
 	var paths = document.querySelectorAll( '#stage #Entidad path' );
 	_.each( municipios, function( municipio ){
 		_.each( paths, function( path ){
-			if ( $(path).data('municipio') === municipio ){
+			if ( path.getAttribute('data-municipio') === municipio ){
 				path.setAttribute('class', 'path_active');
 			}
 		});
@@ -145,8 +145,6 @@ var get_mapa_mexico = function(){
 };
 
 var get_mapa_estado = function( estado ){
-
-	console.log( estado );
 	$.ajax({
 		type: 'GET',
 		url: '/templates/maps/template_'+estado+'.html',
