@@ -85,7 +85,7 @@ var tooltips = function( svg, tipo ){
 	var tooltip_svg = document.querySelector('.tooltip_svg');
 	_.each( paths, function( path ){
 		path.onmouseover = function(){
-			var tooltip_text = ( tipo === 'estados') ? path.dataset.estado : path.dataset.municipio;
+			var tooltip_text = ( tipo === 'estados') ? path.getAttribute('data-estado') : path.getAttribute('data-municipio');
 			tooltip_svg.innerHTML = tooltip_text;
 			tooltip_svg.style.display = 'inline-block';
 		};
