@@ -60,7 +60,7 @@ var wonder_cities_power_activate = function( municipios ){
 	_.each( municipios, function( municipio ){
 		_.each( paths, function( path ){
 			if ( path.dataset.municipio === municipio ){
-				path.style.fill = '#84b13c';
+				path.setAttribute('class', 'path_active');
 			}
 		});
 	});
@@ -375,7 +375,6 @@ $('#stage').on('click', '.home_link', function(a){
 /**** ON CLICK EVENTS  ***/
 $('#stage').on('click', '#mexico_map path', function(){
 	SITE.actual_estado = $(this).data('estado');
-
 	var map_paths = document.querySelectorAll( '#mexico_map path' );
 	_.each( map_paths, function( path ){
 		path.style.fill = '#84b13c';
@@ -384,14 +383,21 @@ $('#stage').on('click', '#mexico_map path', function(){
 });
 
 $('#stage').on('click', '#Entidad path', function(){
-
 	SITE.actual_localidad = $(this).data('municipio');
-
-	var map_municipio = document.querySelectorAll('#Entidad path');
+	var map_municipio = document.querySelectorAll('#Entidad path.path_active');
 	_.each( map_municipio, function(path){
 		path.style.fill = '#84b13c';
 	});
-	this.style.fill = '#4d6d0c';
+	if( this.hasAttribute('class') ){
+		var table_items = $('#stage #table_estate .item-localidad');
+		var municipio = this.dataset.municipio;
+		this.style.fill = '#4d6d0c';
+		_.each( table_items, function( table_item ){
+			if( table_item.dataset.municipio.toLowerCase() === municipio ){
+				$(table_item).addClass('select_item');
+			}
+		});
+	}
 });
 
 
