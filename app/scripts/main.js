@@ -27,6 +27,32 @@ var SITE = (function(){
 		global_sections: function(){
 			$('#header-logo').animate({'top':'0px'}, 500, 'expo');
 		},
+		take_pills: function( section, option ){
+			var pills = $('#take_pills .menu-item');
+			var show_pills = true;
+			if( option === 'show' ){
+				_.each( pills, function( pill ){
+					if( show_pills ){
+						$(pill).show();
+					}
+					if ( pill.firstElementChild.dataset.menu === section ){
+						show_pills = false;
+					}
+				});
+			}
+			if( option === 'hide' ){
+				console.log('hola');
+				show_pills = false;
+				_.each( pills.get().reverse(), function( pill ){
+					if( !show_pills ){
+						$(pill).hide();
+					}
+					if ( pill.firstElementChild.dataset.menu === section ){
+						show_pills = false;
+					}
+				});
+			}
+		},
 		rotate_circle_next: function(){
 			$('.grass').rotate({angle: 0,
             animateTo:180}, 'expo');
@@ -377,25 +403,32 @@ app_router.on('route:home', function() {
 });
 app_router.on('route:ver_pais', function() {
 	get_mapa_mexico();
+	SITE.take_pills('estados', 'show');
 	SITE.global_sections();
 });
 app_router.on('route:ver_estado', function( estado ) {
+	SITE.take_pills('municipios', 'show');
 	get_mapa_estado( estado );
 });
 app_router.on('route:ver_calificacion', function( calificacion ){
 	get_calificacion(calificacion);
+	SITE.take_pills('calificacion', 'show');
 	SITE.global_sections();
 });
 app_router.on('route:ver_vivienda', function(vivienda){
+	SITE.take_pills('vivienda', 'show');
 	get_tipo_vivienda(vivienda);
 });
 app_router.on('route:ver_precio', function(precio){
+	SITE.take_pills('precio', 'show');
 	get_rango_precio(precio);
 });
 app_router.on('route:ver_busqueda', function(busqueda){
+	SITE.take_pills('busqueda', 'show');
 	get_busqueda(busqueda);
 });
 app_router.on('route:ver_resultados', function(resultados){
+	SITE.take_pills('resultados', 'show');
 	get_grafica_resultados(resultados);
 });
 app_router.on('route:ver_materiales', function(materiales){
@@ -441,6 +474,7 @@ $('.link-menu').on('click',  function(e){
 	resetAnimation();
 
 	var menu_link = $(this).data('menu');
+	SITE.take_pills( menu_link, 'hide');
 	Backbone.history.navigate(menu_link, true);
 });
 $('#stage').on('click', '.more_button', function( e ){
