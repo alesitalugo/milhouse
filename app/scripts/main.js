@@ -47,8 +47,10 @@ var SITE = (function(){
 					if( !show_pills ){
 						$(pill).hide();
 					}
-					if ( pill.firstElementChild.dataset.menu === section ){
-						show_pills = false;
+					if( section !== 'home' ){
+						if ( pill.firstElementChild.dataset.menu === section ){
+							show_pills = false;
+						}
 					}
 				});
 			}
@@ -412,7 +414,7 @@ app_router.on('route:ver_pais', function() {
 	SITE.global_sections();
 });
 app_router.on('route:ver_estado', function( estado ) {
-	SITE.take_pills('municipios', 'show');
+	SITE.take_pills('municipio', 'show');
 	get_mapa_estado( estado );
 });
 app_router.on('route:ver_calificacion', function( calificacion ){
@@ -441,9 +443,11 @@ app_router.on('route:ver_materiales', function(materiales){
 });
 Backbone.history.start({ pushState: true });
 
-$('#stage').on('click', '.home_link', function(a){
+$('#header-logo').on('click', '.home_link', function(a){
 	a.preventDefault();
-
+	SITE.take_pills( 'home', 'hide' );
+	Backbone.history.navigate('', true);
+	return false;
 });
 /**** ON CLICK EVENTS  ***/
 $('#stage').on('click', '#mexico_map path', function(){
