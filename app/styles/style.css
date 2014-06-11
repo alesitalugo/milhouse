@@ -734,7 +734,7 @@ a , a img {
 	-ms-border-radius: 15px;
 	height: 40px;
 	display: block;
-	margin: 5px;
+	margin: 0px 0px 5px;
 	text-decoration: none;
 	color: #8bb340;
 }
@@ -1188,7 +1188,7 @@ a , a img {
 }
 #section_three{
 	position: relative;
-	top: 100px;
+	top: 20px;
 }
 .botones_calificacion{
 	width: 199px;
@@ -1222,7 +1222,7 @@ a , a img {
 }
 #section_five{
 	position: relative;
-	top: 100px;
+	top: 30px;
 }
 .on{
 	opacity: 1;
@@ -1343,7 +1343,6 @@ a.buttons_item:hover > .icon{
 	display: none;
 }
 .modal_box{
-	/*display: none;*/
 }
 .container_modal{
 	margin: 170px auto;
@@ -1399,7 +1398,7 @@ a.buttons_item:hover > .icon{
 }
 #section_seven{
 	position: relative;
-	top: 100px;
+	top: 10px;
 }
 .circle {
 	height: 85px;
