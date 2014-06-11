@@ -123,6 +123,7 @@ a , a img {
 	top: 10px;
 	opacity: 0;
 	cursor: pointer;
+	z-index: 3000;
 }
 #header-logo a {
 	width: 266px;
@@ -372,7 +373,7 @@ a , a img {
 }
 #footer{
 	background-color: #fff;
-	height: 180px;
+	height: 200px;
 	position: absolute;
 	bottom: -80px;
 	width: 100%;
@@ -489,10 +490,10 @@ a , a img {
 .title_section .resultados{
 	background: url(../images/new/titles/title_p08.png);
 }
-.title_section .caracteristicas{
+.title_section .materiales{
 	background: url(../images/new/titles/title_p09.png);
 }
-.title_section .materiales{
+.title_section .caracteristicas{
 	background: url(../images/new/titles/title_p10.png);
 }
 
@@ -1267,13 +1268,17 @@ a , a img {
 }
 a.buttons_item {
 	position: relative;
-	background-color: #d8e0e3;
 	border-radius: 25px 25px 25px 25px;
-			-webkit-border-radius:25px 25px 25px 25px;
+	-webkit-border-radius:25px 25px 25px 25px;
 	-moz-border-radius:25px 25px 25px 25px;
 	-o-border-radius:25px 25px 25px 25px;
 	-ms-border-radius: 25px 25px 25px 25px ;
 	text-decoration: none;
+	border-radius: 25px;
+	text-decoration: none;
+	display: block;
+	position: relative;
+	height: 41px;
 }
 a.buttons_item:hover > .icon{
 	-webkit-animation: spinAround 0.1s linear ;
@@ -1281,7 +1286,7 @@ a.buttons_item:hover > .icon{
 	animation: spinAround 0.1s linear ;
 }
 .ventanas .icon{
-	left: 2px !important;
+	left: 85px !important;
 }
 .buttons_item .icon{
 	display: block;
@@ -1289,10 +1294,10 @@ a.buttons_item:hover > .icon{
 	width: 36px;
 	height: 36px;
 	display: block;
-	position: absolute;
-	left: -75px;
 	z-index: 10;
 	top: 2px;
+	position: absolute;
+	left: 4px;
 }
 .buttons_item p {
 	color: #84b23d;

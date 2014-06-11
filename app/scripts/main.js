@@ -317,6 +317,23 @@ var get_grafica_resultados = function(){
 		}
 	});
 };
+var get_caracteristicas = function(){
+	$.ajax({
+		type:'GET',
+		url:'templates/template_caracteristicas.html',
+		beforeSend:function(){
+			resetAnimation();
+		},
+		success: function(response){
+			$('#home').hide();
+			$('#stage').html(response).fadeIn();
+			SITE.rotate_circle('caracteristicas');
+			SITE.actual_section  = 'caracteristicas';
+			$('.menu-item').addClass('menuon');			
+		}
+	});
+};
+
 var get_materiales = function(){
 	$.ajax({
 		type:'GET',
@@ -385,6 +402,7 @@ var AppRouter = Backbone.Router.extend({
 		'busqueda': 'ver_busqueda',
 		'resultados': 'ver_resultados',
 		'materiales':'ver_materiales',
+		'caracteristicas': 'ver_caracteristicas',
 	}
 });
 
@@ -425,6 +443,9 @@ app_router.on('route:ver_resultados', function(resultados){
 app_router.on('route:ver_materiales', function(materiales){
 	get_materiales(materiales);
 });
+app_router.on('route:ver_caracteristicas', function(caracteristicas){
+	get_caracteristicas(caracteristicas);
+});
 Backbone.history.start({ pushState: true });
 
 $('#header-logo').on('click', '.home_link', function(a){
@@ -438,6 +459,7 @@ $('#header-logo').on('click', '.home_link', function(a){
 	Backbone.history.navigate('', true);
 	return false;
 });
+
 /**** ON CLICK EVENTS  ***/
 $('#stage').on('click', '#mexico_map path', function(){
 	SITE.actual_estado = $(this).data('estado');
@@ -470,7 +492,6 @@ $('.link-menu').on('click',  function(e){
 	e.preventDefault();
 	SITE.rotate_circle_next();
 	resetAnimation();
-
 	var menu_link = $(this).data('menu');
 	SITE.take_pills( menu_link, 'hide');
 	Backbone.history.navigate(menu_link, true);
@@ -512,7 +533,6 @@ $('#next').on('click', function(e){
 		}
 		Backbone.history.navigate('precio', true);
 	}
-	
 	if(SITE.actual_section === 'precio'){
 		if(SITE.actual_rango === null){
 			alert('selecciona un rango de precio');
@@ -527,10 +547,13 @@ $('#next').on('click', function(e){
 		}
 		Backbone.history.navigate('busqueda', true);
 	}
-	if(SITE.actual_section === 'resultados'){
+	if(SITE.actual_section === 'busqueda'){
 		Backbone.history.navigate('resultados', true);
 	}
 	if(SITE.actual_section === 'resultados'){
+		Backbone.history.navigate('caracteristicas', true);
+	}
+	if(SITE.actual_section === 'caracteristicas'){
 		Backbone.history.navigate('materiales', true);
 	}
 });
@@ -562,9 +585,7 @@ $('#prev').on('click', function(e){
 		SITE.rotate_circle('home');
 		SITE.actual_section = 'home';
 		Backbone.history.navigate('', true);
-
 	}
-
 });
 
 $('.selected_calf').on('click', function(){
@@ -591,13 +612,10 @@ $('.modal_button').on('click', function(){
 	$('#tips_'+is_modal).addClass('active_modal');
 
 });
-
 $('.close_modal_tips').on('click', function(){
-	console.log('close modal tips ');
 	$('.modal_tip').fadeOut(500);
 });
 $('.close_modal').on('click', function(){
-	console.log('close modal');
 	$('#modal_box').fadeOut(500);
 });
 $('#link_tips').on('click', function(){
@@ -607,8 +625,6 @@ $('#link_tips').on('click', function(){
 	$('.tip_content').rollbar();
 });
 
-//$('.masterTooltip').tooltips();
-
 var sizeAdjust = function(){
 	if(height <= 801){
 		$('.header_background a img').css({'width':'150px'});
@@ -616,17 +632,18 @@ var sizeAdjust = function(){
 		$('.header_background').css({'background-position':'0px -70px'});
 		$('#header-logo a').css({'width':'155px'});
 		$('.header_background').css({'height':'100px'});
-		$('#footer').css({'bottom':'-152px'});
+		$('#footer').css({'bottom':'-172px'});
 		$('.grass').css({'bottom':'-680px'});
 		$('.title_section').css({'bottom':'-760px'});
 		$('.nav_menu .arrow').css({'top':'-55px'});
 		$('.container_modal').css({'margin':'170px auto'});
 	} else {
 		$('#footer').css({'bottom':'0px'});
-		$('.grass').css({'bottom':'-520px'});
-		$('.title_section').css({'bottom':'-605px'});
+		$('.grass').css({'bottom':'-499px'});
+		$('.title_section').css({'bottom':'-585px'});
 	}
 };
+
 $(window).resize(function(){
 	height = $(window).outerHeight();
 	sizeAdjust();
