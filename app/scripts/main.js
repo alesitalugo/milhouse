@@ -634,12 +634,12 @@ $('.close_modal').on('click', function(){
 	$('#modal_box').fadeOut(500);
 });
 
-$('#link_tips').on('click', function(){
+/*$('#link_tips').on('click', function(){
 	$('.modal_tip').fadeIn(500, function(){
 		$('.content_modal').fadeIn(1000);
 	});
 	$('.tip_content').rollbar();
-});
+});*/
 
 var sizeAdjust = function(){
 	if(height <= 801){
