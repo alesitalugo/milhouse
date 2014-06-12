@@ -357,6 +357,7 @@ var get_materiales = function(){
 };
 
 var animateHome = function(){
+
 	$('.line_home').animate({'height':'280px'}, 1500, function(){
 		$('.plants').animate({'left':'-34px', 'width':'93px', 'opacity':1}, 400, function(){
 			$('.item_left').animate({
@@ -378,6 +379,9 @@ var animateHome = function(){
 };
 
 var show_section_home = function(){
+	SITE.take_pills( 'home', 'hide' );
+	SITE.actual_section = 'home';
+	SITE.rotate_circle('home');
 	$('#prev').hide();
 
 	$('#container').animate({'top':'250px'}, 500 , 'expo', function(){
@@ -456,9 +460,10 @@ $('#header-logo').on('click', '.home_link', function(a){
 	a.preventDefault();
 	SITE.take_pills( 'home', 'hide' );
 	SITE.actual_section = 'home';
+	SITE.rotate_circle('home');
+
 	$('#next').fadeIn(500);
 	SITE.rotate_circle_next();
-	SITE.rotate_circle('home');
 	$('#prev').fadeOut(500);
 	Backbone.history.navigate('', true);
 	return false;
@@ -641,12 +646,12 @@ $('.close_modal').on('click', function(){
 	$('#modal_box').fadeOut(500);
 });
 
-/*$('#link_tips').on('click', function(){
+$('#link_tips').on('click', function(){
 	$('.modal_tip').fadeIn(500, function(){
 		$('.content_modal').fadeIn(1000);
 	});
 	$('.tip_content').rollbar();
-});*/
+});
 
 var sizeAdjust = function(){
 	if(height <= 801){
