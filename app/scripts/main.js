@@ -34,6 +34,8 @@ var SITE = (function(){
 				_.each( pills, function( pill ){
 					if( show_pills ){
 						$(pill).fadeIn();
+					} else{
+						$(pill).fadeOut();
 					}
 					if ( pill.firstElementChild.dataset.menu === section ){
 						show_pills = false;
@@ -423,9 +425,8 @@ app_router.on('route:ver_estado', function( estado ) {
 });
 app_router.on('route:ver_calificacion', function( calificacion ){
 	get_calificacion(calificacion);
-	console.log(' damn ');
-	//SITE.take_pills('calificacion', 'show');
-	//SITE.global_sections();
+	SITE.take_pills('calificacion', 'show');
+	SITE.global_sections();
 });
 app_router.on('route:ver_vivienda', function(vivienda){
 	SITE.take_pills('vivienda', 'show');
