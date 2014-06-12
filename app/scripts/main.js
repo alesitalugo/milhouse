@@ -41,7 +41,6 @@ var SITE = (function(){
 				});
 			}
 			if( option === 'hide' ){
-				console.log('hola');
 				show_pills = false;
 				_.each( pills.get().reverse(), function( pill ){
 					if( !show_pills ){
@@ -80,6 +79,8 @@ var SITE = (function(){
 	};
 }());
 
+SITE.rotate_circle_next();
+
 var tooltips = function( svg, tipo ){
 	var paths = document.querySelectorAll( svg );
 	var tooltip_svg = document.querySelector('.tooltip_svg');
@@ -110,7 +111,6 @@ var wonder_cities_power_activate = function( municipios ){
 		});
 	});
 };
-
 
 /***** AJAX REQUEST ***/
 var get_mapa_mexico = function(){
@@ -329,7 +329,7 @@ var get_caracteristicas = function(){
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('caracteristicas');
 			SITE.actual_section  = 'caracteristicas';
-			$('.menu-item').addClass('menuon');			
+			$('.menu-item').addClass('menuon');
 		}
 	});
 };
@@ -373,8 +373,10 @@ var animateHome = function(){
 		
 	});
 };
+
 var show_section_home = function(){
 	$('#prev').hide();
+
 	$('#container').animate({'top':'250px'}, 500 , 'expo', function(){
 		animateHome();
 	});
@@ -386,7 +388,6 @@ var show_section_home = function(){
 	$('#stage').hide();
 	$('#home').fadeIn();
 	$('#header-logo').css({'top':'-200px'});
-	
 };
 
 /***** BACKBONE ROUTER ***/
@@ -459,7 +460,17 @@ $('#header-logo').on('click', '.home_link', function(a){
 	Backbone.history.navigate('', true);
 	return false;
 });
-
+$('#link_home').on('click', function(e){
+	e.preventDefault();
+	SITE.take_pills( 'home', 'hide' );
+	SITE.actual_section = 'home';
+	$('#next').fadeIn(500);
+	SITE.rotate_circle_next();
+	SITE.rotate_circle('home');
+	$('#prev').fadeOut(500);
+	Backbone.history.navigate('', true);
+	return false;
+});
 /**** ON CLICK EVENTS  ***/
 $('#stage').on('click', '#mexico_map path', function(){
 	SITE.actual_estado = $(this).data('estado');
@@ -488,24 +499,30 @@ $('#stage').on('click', '#Entidad path', function(){
 		});
 	}
 });
+
 $('.link-menu').on('click',  function(e){
 	e.preventDefault();
 	SITE.rotate_circle_next();
 	resetAnimation();
+	$('#next').show();
+	$('#prev').show();
 	var menu_link = $(this).data('menu');
 	SITE.take_pills( menu_link, 'hide');
 	Backbone.history.navigate(menu_link, true);
 });
+
 $('#stage').on('click', '.more_button', function( e ){
 	e.preventDefault();
 	Backbone.history.navigate('resultados', true);
 	SITE.rotate_circle_next();
 });
+
 $('#go_init').on('click', function(a){
 	a.preventDefault();
 	Backbone.history.navigate( 'estados' , true );
 	SITE.rotate_circle_next();
 });
+
 $('#next').on('click', function(e){
 	e.preventDefault();
 	SITE.rotate_circle_next();
@@ -561,10 +578,10 @@ $('#next').on('click', function(e){
 $('#prev').on('click', function(e){
 	e.preventDefault();
 	SITE.rotate_circle_prev();
-	console.log(SITE.actual_section);
+	//console.log(SITE.actual_section);
 	if(SITE.actual_section === 'materiales'){
 		Backbone.history.navigate('resultados', true);
-		console.log(SITE.actual_section);
+		//console.log(SITE.actual_section);
 	}
 	if(SITE.actual_section === 'resultados'){
 		Backbone.history.navigate('busqueda', true);
@@ -593,8 +610,6 @@ $('.selected_calf').on('click', function(){
 	$(this).find('.selected').addClass('on');
 });
 
-$('.grass').rotate({animateTo: 180}, 100, 'expo');
-$('.title_section').rotate({animateTo:360}, 300, 'expo');
 
 $('#stage').on('click', '.buttons_item', function(a){
 	a.preventDefault();
@@ -605,19 +620,20 @@ $('#stage').on('click', '.buttons_item', function(a){
 $('.modal_button').on('click', function(){
 	$('.modal_button').removeClass('active');
 	$(this).addClass('active');
-
 	$('.tip_content').rollbar();
 	$('.tip_modal').removeClass('active_modal');
 	var is_modal = $(this).data('show-modal');
 	$('#tips_'+is_modal).addClass('active_modal');
-
 });
+
 $('.close_modal_tips').on('click', function(){
 	$('.modal_tip').fadeOut(500);
 });
+
 $('.close_modal').on('click', function(){
 	$('#modal_box').fadeOut(500);
 });
+
 $('#link_tips').on('click', function(){
 	$('.modal_tip').fadeIn(500, function(){
 		$('.content_modal').fadeIn(1000);
