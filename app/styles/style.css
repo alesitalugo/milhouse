@@ -126,7 +126,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	margin: 20px auto;
 	clear: both;
 	position: relative;
-	top: 10px;
+	top: -10px;
 	opacity: 0;
 	cursor: pointer;
 	z-index: 3000;
@@ -461,8 +461,8 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 #add_title{
 	margin: 0 auto;
 	position: relative;
-	top: 20px;
-	left: 0px;
+	top: 30px;
+	left: 5px;
 	width: 650px;
 	text-align: center;
 	height: 155px;
@@ -489,6 +489,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 }
 .title_section .vivienda{
 	background: url(../images/new/titles/title_p06.png);
+	top: 19px !important;
 }
 .title_section .busqueda{
 	background: url(../images/new/titles/title_p07.png);
@@ -502,8 +503,6 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 .title_section .caracteristicas{
 	background: url(../images/new/titles/title_p10.png);
 }
-
-
 
 .grass{
 	background: url('../images/pasto01.png');
@@ -691,11 +690,11 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	margin: 5px;
 	cursor: pointer;
 }
-.select_item {
+/*.select_item {
 	background: rgba(71, 101, 1, 0.21);
-}
+}*/
 .select_item > p{
-	color: #fff;
+	color: #85b23d;
 }
 .table-content .item-row{
 	width: 300px;
@@ -743,11 +742,11 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 .price_item{
 	width: 100%;
 	background-color: #fff;
-	border-radius: 15px;
-	-webkit-border-radius: 15px;
-	-moz-border-radius: 15px;
-	-o-border-radius: 15px;
-	-ms-border-radius: 15px;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-o-border-radius: 25px;
+	-ms-border-radius: 25px;
 	height: 40px;
 	display: block;
 	margin: 0px 0px 5px;
@@ -847,7 +846,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	background-position:  -122px -181px;
 }
 .description{
-	font-size: 14px;
+	font-size: 12px;
 	margin: 0;
 	padding: 0;
 	color: #6d9600;
@@ -986,10 +985,11 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	top: 0px;
 }
 .content_table {
-	height: 420px;
+	height: 370px;
 	position: relative;
 	width: 840px;
-	margin: 0 auto;
+	margin: 0px auto;
+	top: 20px;
 }
 .tipodevivienda{
 	width: 403px;
@@ -1218,6 +1218,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 .item_calf{
 	list-style-type: none;
 	padding: 2px 0px;
+	cursor: pointer;
 }
 .selected_calf{
 	background: url(../images/new/spriteAverage01.png);
