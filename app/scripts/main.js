@@ -156,8 +156,6 @@ var get_mapa_estado = function( estado ){
 					//console.log( '/api/'+estado+'.json' );
 				},
 				success: function(response){
-					var localidad_save = '' ;
-					$('#menudos').data('menu','aaa');
 					var html_table = '';
 					var localidad = '';
 					var aproved_class = '';
@@ -187,10 +185,8 @@ var get_mapa_estado = function( estado ){
 						if( selected ){
 							selected.style.fill = '#4d6d0c';
 						}
+						SITE.actual_municipio = localidad;
 					});
-
-					localidad_save =  localidad;
-					SITE.actual_municipio = localidad_save;
 				}
 			});
 		}
@@ -427,8 +423,9 @@ app_router.on('route:ver_estado', function( estado ) {
 });
 app_router.on('route:ver_calificacion', function( calificacion ){
 	get_calificacion(calificacion);
-	SITE.take_pills('calificacion', 'show');
-	SITE.global_sections();
+	console.log(' damn ');
+	//SITE.take_pills('calificacion', 'show');
+	//SITE.global_sections();
 });
 app_router.on('route:ver_vivienda', function(vivienda){
 	SITE.take_pills('vivienda', 'show');
@@ -487,7 +484,7 @@ $('#stage').on('click', '#mexico_map path', function(){
 });
 
 $('#stage').on('click', '#Entidad path', function(){
-	SITE.actual_localidad = $(this).data('municipio');
+	SITE.actual_municipio = $(this).data('municipio');
 	var map_municipio = document.querySelectorAll('#Entidad path.path_active');
 	_.each( map_municipio, function(path){
 		path.style.fill = '#84b13c';
@@ -513,7 +510,11 @@ $('.link-menu').on('click',  function(e){
 	$('#prev').show();
 	var menu_link = $(this).data('menu');
 	SITE.take_pills( menu_link, 'hide');
-	Backbone.history.navigate(menu_link, true);
+	if( menu_link === 'municipio' ){
+		Backbone.history.navigate('estados/'+SITE.actual_estado, true);
+	} else {
+		Backbone.history.navigate(menu_link, true);
+	}
 });
 
 $('#stage').on('click', '.more_button', function( e ){
@@ -583,7 +584,7 @@ $('#next').on('click', function(e){
 $('#prev').on('click', function(e){
 	e.preventDefault();
 	SITE.rotate_circle_prev();
-	//console.log(SITE.actual_section);
+	console.log( SITE.actual_section );
 	if(SITE.actual_section === 'materiales'){
 		Backbone.history.navigate('resultados', true);
 		//console.log(SITE.actual_section);
@@ -600,12 +601,10 @@ $('#prev').on('click', function(e){
 	if(SITE.actual_section === 'precio'){
 		Backbone.history.navigate('calificacion', true);
 	}
-	if(SITE.actual_section === 'calificacion', true){
+	if(SITE.actual_section === 'calificacion'){
 		Backbone.history.navigate('estados', true);
 	}
 	if(SITE.actual_section === 'estados'){
-		SITE.rotate_circle('home');
-		SITE.actual_section = 'home';
 		Backbone.history.navigate('', true);
 	}
 });
