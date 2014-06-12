@@ -143,7 +143,7 @@ var get_mapa_estado = function( estado ){
 			$('#home').hide();
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
-			SITE.actual_section = estado;
+			SITE.actual_section = 'municipios';
 			SITE.actual_estado = estado;
 
 			tooltips( '#stage #Entidad path', 'municipios' );
@@ -542,7 +542,7 @@ $('#next').on('click', function(e){
 		}
 		Backbone.history.navigate( 'estados/'+SITE.actual_estado, true );
 	}
-	if( SITE.actual_section === SITE.actual_estado){
+	if( SITE.actual_section === 'municipios'){
 		if(SITE.actual_municipio === null){
 			alert('seleciona una localidad');
 			return 0;
@@ -587,7 +587,6 @@ $('#prev').on('click', function(e){
 	console.log( SITE.actual_section );
 	if(SITE.actual_section === 'materiales'){
 		Backbone.history.navigate('resultados', true);
-		//console.log(SITE.actual_section);
 	}
 	if(SITE.actual_section === 'resultados'){
 		Backbone.history.navigate('busqueda', true);
@@ -602,6 +601,9 @@ $('#prev').on('click', function(e){
 		Backbone.history.navigate('calificacion', true);
 	}
 	if(SITE.actual_section === 'calificacion'){
+		Backbone.history.navigate('estados/'+SITE.actual_estado, true);
+	}
+	if(SITE.actual_section === 'municipios'){
 		Backbone.history.navigate('estados', true);
 	}
 	if(SITE.actual_section === 'estados'){
