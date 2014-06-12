@@ -179,9 +179,14 @@ var get_mapa_estado = function( estado ){
 					$('.aproved').on('click', function(){
 						$('.item-localidad').removeClass('select_item');
 						var allitem = $(this).parent();
+						var paths = document.querySelectorAll( '#stage #Entidad path' );
 						$(allitem).addClass('select_item');
 						localidad = $(allitem).data('municipio');
-						//console.log(localidad);
+						localidad = localidad.split(' ').join('_').toLowerCase();
+						var selected = _.find( paths , function( path ){ return path.getAttribute('data-municipio') === localidad; });
+						if( selected ){
+							selected.style.fill = '#4d6d0c';
+						}
 					});
 
 					localidad_save =  localidad;
