@@ -134,6 +134,8 @@ var get_mapa_mexico = function(){
 	});
 };
 
+//RECORDAR PONER EL PARSE JSON 
+
 var get_mapa_estado = function( estado ){
 	$.ajax({
 		type: 'GET',
@@ -350,7 +352,7 @@ var get_materiales = function(){
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('materiales');
 			SITE.actual_section = 'materiales';
-			//$('.table-content').rollbar();
+			$('.contenido_de_la_tabla').rollbar();
 			$('.menu-item').addClass('menuon');
 		}
 	});
@@ -368,6 +370,7 @@ var animateHome = function(){
 					'left': '0px',
 					'opacity': 1
 				}, 1000, 'expo', function(){
+					$('#patrocinadores').fadeIn(1000);
 					$('#go_init').animate({
 						'opacity': 1
 					}, 600, 'expo');
@@ -665,15 +668,21 @@ var sizeAdjust = function(){
 		$('.title_section').css({'bottom':'-760px'});
 		$('.nav_menu .arrow').css({'top':'-55px'});
 		$('.container_modal').css({'margin':'170px auto'});
+		$('#patrocinadores').css({
+			'position': 'relative',
+			'top': '-160px'
+		});
 	} else {
-		$('#footer').css({'bottom':'0px'});
-		$('.grass').css({'bottom':'-499px'});
-		$('.title_section').css({'bottom':'-585px'});
+		$('#footer').css({'bottom':'-100px'});
+		$('.grass').css({'bottom':'-609px'});
+		$('.title_section').css({'bottom':'-685px'});
+		
 	}
 };
 
 $(window).resize(function(){
 	height = $(window).outerHeight();
 	sizeAdjust();
+	$('#container').css({'top':'70px'});
 });
 sizeAdjust();

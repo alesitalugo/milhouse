@@ -1977,3 +1977,16 @@ top: 48px;
 	transform-origin:(50% 50%);
 
 }
+
+.logo_patrocinador{
+	float: left;
+	margin: 0 15px;
+}
+#patrocinadores{
+	margin: 0 auto;
+	display: none;
+	text-align: center;
+	width: 815px;
+	position: relative;
+	top:0px;
+}
