@@ -87,7 +87,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 
 }
 .line_home{
-	height: 0px;
+	height: 280px;
 	float: left;
 }
 #line{
@@ -184,17 +184,21 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	-moz-border-radius: 40px ;
 	-o-border-radius:40px ;
 	-ms-border-radius:40px ;
-	width: 40px;
+	width: 35px;
 	position: relative;
+}
+#button_mapa{
+	padding-top:0px;
+
 }
 #header .nav .menu-item {
 	display: none;
 	list-style-type: none;
 	clear: both;
-	height: 60px;
+	height: 65px;
 	margin: 0px auto;
-	padding: 10px 0;
-	width: 18px;
+	padding: 0px 0px 3px;
+	width: 17px;
 }
 #header .nav .menuon{
 	display: block;
@@ -202,7 +206,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 #header .nav  .menu-item a {
 	list-style-type: none;
 	line-height: 58px;
-	padding: 0;
+	padding:5px 0;
 	width: 173px;
 	display: block;
 	position: relative;
@@ -213,6 +217,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	text-align: center;
 	z-index: 900;
 	cursor: pointer;
+	height: 60px;
 }
 #header .nav .menu-item .link-menu .icon{
 	margin: 0 auto;
@@ -381,7 +386,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	background-color: #fff;
 	height: 200px;
 	position: absolute;
-	bottom: -80px;
+	bottom: -110px;
 	width: 100%;
 	z-index: 10;
 }
@@ -450,22 +455,22 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	margin: 0 auto;
 }
 .title_section{
-	background: url(../images/new/bgTitle01.png);
-	width: 1002px;
-	height: 961px;
+	background: url(../images/fixbgTitle01.png);
+	width: 1192px;
+	height: 259px;
 	position: fixed;
-	bottom: -715px;
-	background-position: center;
+	bottom: -10px;
+	background-position: -130px 10px;
 	background-repeat: no-repeat;
 }
 #add_title{
 	margin: 0 auto;
 	position: relative;
-	top: 30px;
+	top: 28px;
 	left: 5px;
-	width: 650px;
+	width: 890px;
 	text-align: center;
-	height: 155px;
+	height: 246px;
 	background-repeat: no-repeat;
 }
 
@@ -498,18 +503,18 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	background: url(../images/new/titles/title_p08.png);
 }
 .title_section .materiales{
-	background: url(../images/new/titles/title_p09.png);
+	background: url(../images/new/titles/title_p10.png);
 }
 .title_section .caracteristicas{
-	background: url(../images/new/titles/title_p10.png);
+	background: url(../images/new/titles/title_p09.png);
 }
 
 .grass{
-	background: url('../images/pasto01.png');
+	background: url('../images/fixedgrass01.png');
 	width: 986px;
-	height: 801px;
+	height: 181px;
 	position: fixed;
-	bottom: -620px;
+	bottom: -10px;
 	background-position: center;
 	background-repeat: no-repeat;
 }
