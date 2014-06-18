@@ -86,6 +86,21 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	opacity: 0;
 
 }
+.plant-left{
+	background-image: url(../images/new/plantsLeft01.png);
+height: 110px;
+width: 33.333%;
+position: absolute;
+left: 0px;
+
+}
+.plant-right{
+	background-image: url(../images/new/plantsRight01.png);
+	height: 108px;
+width: 33.333%;
+position: absolute;
+right: 0px;
+}
 .line_home{
 	height: 280px;
 	float: left;
@@ -104,9 +119,9 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	/*top: -200px;*/
 }
 .header_background{
-	width: 874px;
+	width: 704px;
 	background: url('../images/new/backHeader01.png');
-	height: 173px;
+	height: 123px;
 	margin: 0 auto;
 	position: relative;
 	z-index: 1;
@@ -139,22 +154,23 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	padding-top: 25px;
 }
 #branches-top{
-	width: 100%;
+	/*width: 100%;
 	height: 107px;
 	background: url('../images/new/plantsLeft01.png');
 	left: 0px;
 	position: fixed;
-	background-position: 245px 0px;
+	background-position: 245px 0px;*/
 }
 #wrap {
 	width: 100%;
 	height: auto; 
+	position: absolute;
 }
 #container{
 	width: 980px;
 	margin: 0 auto;
 	height: 500px;
-	top:-730px;
+	top:0px;
 	position: relative;
 }
 .section .content{
@@ -170,7 +186,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	float: right;
 	padding: 10px 5px;
 	position: absolute;
-	right: 0;
+	right: 10px;
 	margin: 0px 0px 0px 0px;
 	top: 6%;
 	position: fixed;
@@ -384,9 +400,9 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 }
 #footer{
 	background-color: #fff;
-	height: 200px;
+	height: 270px;
 	position: absolute;
-	bottom: -110px;
+	bottom: -180px;
 	width: 100%;
 	z-index: 10;
 }
@@ -460,8 +476,9 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	height: 259px;
 	position: fixed;
 	bottom: -10px;
-	background-position: -130px 10px;
+	background-position: -130px 15px;
 	background-repeat: no-repeat;
+
 }
 #add_title{
 	margin: 0 auto;
@@ -472,6 +489,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	text-align: center;
 	height: 246px;
 	background-repeat: no-repeat;
+	
 }
 
 /*ADD TITLES SECTION*/
@@ -479,39 +497,59 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 
 .title_section .home{
 	background: url(../images/new/titles/title_p01.png);
+	
+	opacity: 1;
 }
 .title_section .mapa{
 	background: url(../images/new/titles/title_p02.png);
+	
+	opacity: 1;
 }
 .title_section .estado{
 	background: url(../images/new/titles/title_p03.png);
+	
+	opacity: 1;
 }
 .title_section .calificacion{
 	background: url(../images/new/titles/title_p04.png);
+	
+	opacity: 1;
 }
 .title_section .precio{
 	background: url(../images/new/titles/title_p05.png);
+	
+	opacity: 1;
 }
 .title_section .vivienda{
 	background: url(../images/new/titles/title_p06.png);
+	
+	opacity: 1;
 	top: 19px !important;
 }
 .title_section .busqueda{
 	background: url(../images/new/titles/title_p07.png);
+	
+	opacity: 1;
 }
 .title_section .resultados{
 	background: url(../images/new/titles/title_p08.png);
+	
+	opacity: 1;
 }
 .title_section .materiales{
 	background: url(../images/new/titles/title_p10.png);
+	
+	opacity: 1;
 }
 .title_section .caracteristicas{
 	background: url(../images/new/titles/title_p09.png);
+	
+	opacity: 1;
 }
 
 .grass{
 	background: url('../images/fixedgrass01.png');
-	width: 986px;
+	width: 980px;
 	height: 181px;
 	position: fixed;
 	bottom: -10px;
@@ -987,7 +1025,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 }
 #section_six{
 	position: relative;
-	top: 0px;
+	top: 15px;
 }
 .content_table {
 	height: 370px;
@@ -1212,7 +1250,11 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 }
 #section_three{
 	position: relative;
-	top: 20px;
+	top: 50px;
+}
+#section_four{
+	position: relative;
+	top:30px;
 }
 .botones_calificacion{
 	width: 199px;
@@ -1247,7 +1289,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 }
 #section_five{
 	position: relative;
-	top: 30px;
+	top: 50px;
 }
 .on{
 	opacity: 1;
@@ -1428,7 +1470,11 @@ a.buttons_item:hover > .icon{
 }
 #section_seven{
 	position: relative;
-	top: 10px;
+	top: 50px;
+}
+#section_eight{
+	position: relative;
+	top:50px;
 }
 .circle {
 	height: 85px;
@@ -1982,16 +2028,20 @@ top: 48px;
 	transform-origin:(50% 50%);
 
 }
-
-.logo_patrocinador{
-	float: left;
+#patrocinio{
+	width: 615px;
+	margin: 0 auto;
+}
+.patrocinador{
+	float: right;
+	list-style-type: none;
 	margin: 0 15px;
 }
-#patrocinadores{
-	margin: 0 auto;
-	display: none;
-	text-align: center;
-	width: 815px;
+#patrocinio p{
+	width: 120px;
+	font-size: 14px;
+	color: #8bb03c;
+	line-height: 0px;
 	position: relative;
-	top:0px;
+	top: 49px;
 }
