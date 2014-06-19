@@ -147,19 +147,19 @@ right: 0px;
 	z-index: 3000;
 }
 #header-logo a {
-	width: 266px;
-	height: 119px;
+	width: 196px;
+	height: 82px;
 	margin: 0 auto;
 	display: block;
-	padding-top: 25px;
+	padding-top: 10px;
 }
 #branches-top{
-	/*width: 100%;
+	width: 100%;
 	height: 107px;
 	background: url('../images/new/plantsLeft01.png');
 	left: 0px;
 	position: fixed;
-	background-position: 245px 0px;*/
+	background-position: 245px 0px;
 }
 #wrap {
 	width: 100%;
@@ -767,20 +767,45 @@ right: 0px;
 }
 #section_two  .content .column {
 	float: left;
-	width: 580px;
+	width: 616px;
 }
 #section_two .content .column_table{
-	width: 400px;
+	width: 360px;
 	float: right;
 	position: relative;
-	/*position: relative;*/
-	top: 70px;
+	top: 10px;
+	margin: 0 auto;
+}
+.search_municipio {
+	width: 100%;
+	margin: 10px 0px;
+	text-align: left;
+}
+.search_municipio p {
+	margin: 5px 0px;
+	color: #476501;
+}
+.search_municipio input {
+	width: 70%;
+	height: 30px;
+	padding: 3px;
+	color: #85b23d;
+	border: none;
+	border: 1px solid #CBDBB1;
+	border-radius: 15px;
+}
+.search_municipio input:focus{
+	border: 1px solid #CBDBB1;
+	outline: 0;
+}
+#rangodeprecios{
+
 }
 .price_list{
 	width: 330px;
 	position: relative;
 	margin:0 auto;
-	height: auto;
+	overflow: hidden;
 }
 .price_item{
 	width: 100%;
@@ -924,7 +949,7 @@ right: 0px;
 	font-family: 'shantiregular';
 }
 .calificacion_image{
-	background: url(../images/new/calificacion.png) no-repeat -200px -3px;
+	background: url(../images/new/calificacion.png) no-repeat -281px -3px;
 	width: 58px;
 	height: 41px;
 
@@ -939,11 +964,26 @@ right: 0px;
 	font-family: 'shantiregular';
     font-size: 14px;
 }
+.precio_info{
+	height: 44px;
+width: 135px;
+float: none;
+margin: 0px;
+}
+.precio_info .info{
+	width: 78px;
+	line-height: 43px;
+}
+.precio_info .icon{
+	background-position: -289px -173px;
+	width: 44px;
+	height: 44px;
+}
 .ubicacion_button{
 	text-decoration: none;
 	width: 85px;
 	height: 35px;
-	background-color: #85b23d;
+	background-color: #d8e0e3;
 	border-radius: 25px;
 	-webkit-border-radius: 25px ;
 	-moz-border-radius: 25px ;
@@ -952,11 +992,11 @@ right: 0px;
 	display: block;
 	padding: 0 20px;
 	line-height: 34px;
-	color: #fff;
+	color: #85b23d;
 	-webkit-transition: background 0.5s, color 0.2s;
 	-moz-transition: background 0.5s, color 0.2s;
 	transition: background 0.5s, color 0.2s;
-
+	margin: 10px 0px;
 }
 .ubicacion_button .icon{
 	background: url('../images/new/sprite01.png');
@@ -1257,7 +1297,7 @@ right: 0px;
 	top:30px;
 }
 .botones_calificacion{
-	width: 199px;
+	width: 273px;
 	margin: 0px auto;
 	padding: 0px;
 	text-align: center;
@@ -1268,8 +1308,8 @@ right: 0px;
 	cursor: pointer;
 }
 .selected_calf{
-	background: url(../images/new/spriteAverage01.png);
-	width: 199px;
+	background: url(../images/new/calificacion.png);
+	width: 273px;
 	height: 43px;
 	display: block;
 }
@@ -1664,10 +1704,10 @@ a.buttons_item:hover > .icon{
 }
 #canvas{
 	float: right;
-	width: 780px;
+	width: 730px;
 	font-family: 'nilland-smallcapsbold';
 	position: relative;
-	right: 70px;
+	right: 55px;
 }
 #canvas .circle {
 	display: inline-block;
@@ -1685,9 +1725,9 @@ a.buttons_item:hover > .icon{
 	top: 30%;		
 }
  #circles-1 .icon{
-	background-position: -72px -223px;
-	width: 23px;
-	height: 47px;
+	background-position: -283px -228px;
+	width: 37px;
+	height: 38px;
 }
 #circles-2 .icon {
 	background-position: -163px -224px;
@@ -1717,9 +1757,9 @@ a.buttons_item:hover > .icon{
 	font-size: 22px;
 }
 #circles-1  .circles-text-wrp, #graphic_design  .info_circle{
-	background: url('../images/new/calificacion.png') -280px -8px;
+	background: url('../images/new/calificacion.png') -344px -8px;
 	width: 110px;
-	height: 68px;
+	height: 58px;
 	position: relative;
 	float: left;
 top: 48px;
@@ -1730,8 +1770,8 @@ top: 48px;
 	font-size: 36px;
 	color: #fff;
 	text-align: center;
-	left: 3px;
-	width: 95px;
+	left: 19px;
+	width: 75px;
 }
 #graphic_design .info_circle .number span {
 	float: right;
@@ -1744,8 +1784,8 @@ top: 48px;
 	font-size: 36px;
 	color: #fff;
 	text-align: center;
-	left: 3px;
-	width: 95px;
+	left: 19px;
+	width: 75px;
 }
 #graphic_energy .info_circle .number span {
 	float: right;
@@ -1758,8 +1798,8 @@ top: 48px;
 	font-size: 36px;
 	color: #fff;
 	text-align: center;
-	left: 3px;
-	width: 95px;
+	left: 19px;
+	width: 75px;
 }
 #graphic_water .info_circle .number span {
 	float: right;
@@ -1767,7 +1807,7 @@ top: 48px;
 	font-size: 20px;
 }
 #graphic_energy  .circles-text-wrp, #graphic_energy  .info_circle{
-	background: url('../images/new/calificacion.png') -287px -245px;
+	background: url('../images/new/calificacion.png') -351px -245px;
 	width: 108px;
 	height: 57px;
 	position: relative;
@@ -1775,7 +1815,7 @@ top: 48px;
 top: 48px;
 }
 #graphic_water  .circles-text-wrp, #graphic_water .info_circle{
-	background: url('../images/new/calificacion.png') -287px -175px;
+	background: url('../images/new/calificacion.png') -351px -175px;
 	width: 98px;
 	height: 57px;
 	position: relative;
@@ -1835,7 +1875,7 @@ top: 48px;
 	float: left;
 }
 #graphic_emisiones .info_circle{
-	background: url(../images/new/calificacion.png)-431px 0 ;
+	background: url(../images/new/calificacion.png)-495px 0 ;
 	width: 145px;
 	height: 77px;
 	float: right;
@@ -1907,7 +1947,7 @@ top: 48px;
 
 }
 #graphic_save .info_circle{
-	background: url(../images/new/calificacion.png) no-repeat -280px -84px ;
+	background: url(../images/new/calificacion.png) no-repeat -344px -84px ;
 	
 		width: 151px;
 	height: 77px;

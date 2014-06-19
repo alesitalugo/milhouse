@@ -4,8 +4,18 @@
 var height = $(window).outerHeight();
 var resetAnimation = function(){
 	/*$('#container').css({'top':'-730px'});*/
+	$('#wrap').css({'top':'-100%'});
 };
 
+var resetScrollbar = function(){
+	var minsizeforscrolling = (height - 275);
+	console.log(minsizeforscrolling);
+	if(minsizeforscrolling <= 355){
+		
+	}
+};
+
+resetScrollbar();
 var SITE = (function(){
 	var site_loaded = false;
 	var actual_section = 'home';
@@ -75,9 +85,10 @@ var SITE = (function(){
 			$('#button_'+section).fadeIn();
 			if(height <= 801){
 				/*$('#container').animate({'top':'90px'}, 1000, 'expo');*/
-				$('#wrap').css({'top':'10%'});
+
+				$('#wrap').animate({'top':'10%'}, 1000, 'expo');
 			} else {
-				$('#wrap').css({'top':'20%'});				
+				$('#wrap').animate({'top':'20%'}, 1000, 'expo');
 				/*$('#container').animate({'top':'170px'}, 1000 , 'expo');*/
 			}
 		}
@@ -127,6 +138,9 @@ var get_mapa_mexico = function(){
 		},
 		success: function( response ) {
 			$('#home').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
+			$('#branches-top').hide();
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('mapa');
 			SITE.actual_section	= 'estados';
@@ -148,6 +162,9 @@ var get_mapa_estado = function( estado ){
 		},
 		success: function( response ) {
 			$('#home').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
+			$('#branches-top').hide();
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
 			SITE.actual_section = 'municipios';
@@ -209,6 +226,9 @@ var get_calificacion = function(){
 		},
 		success: function(response){
 			$('#home').hide();
+			$('#branches-top').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('calificacion');
 			SITE.actual_section = 'calificacion';
@@ -234,6 +254,9 @@ var get_tipo_vivienda = function(){
 		},
 		success: function(response){
 			$('#home').hide();
+			$('#branches-top').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('vivienda');
 			SITE.actual_section = 'vivienda';
@@ -258,6 +281,9 @@ var get_rango_precio = function(){
 		},
 		success: function(response){
 			$('#home').hide();
+			$('#branches-top').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('precio');
 			SITE.actual_section = 'precio';
@@ -269,6 +295,11 @@ var get_rango_precio = function(){
 				$(this).addClass('on');
 				SITE.actual_rango = rango_select;
 			});
+			$('.price_list').rollbar();
+			if(height >=650){
+				$('.price_list').rollbar({ autoHide: false, });
+			}
+
 		}
 	});
 };
@@ -282,6 +313,9 @@ var get_busqueda = function(){
 		},
 		success: function(response){
 			$('#home').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
+			$('#branches-top').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('busqueda');
 			SITE.actual_section = 'busqueda';
@@ -300,6 +334,9 @@ var get_grafica_resultados = function(){
 		success: function(response){
 			$('#next').fadeIn(500);
 			$('#home').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
+			$('#branches-top').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('resultados');
 			SITE.actual_section = 'resultados';
@@ -334,6 +371,9 @@ var get_caracteristicas = function(){
 		},
 		success: function(response){
 			$('#home').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
+			$('#branches-top').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('caracteristicas');
 			SITE.actual_section  = 'caracteristicas';
@@ -351,6 +391,9 @@ var get_materiales = function(){
 		},
 		success: function(response){
 			$('#next').hide();
+			$('.plant-left').show();
+			$('.plant-right').show();
+			$('#branches-top').hide();
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('materiales');
@@ -362,6 +405,9 @@ var get_materiales = function(){
 };
 
 var animateHome = function(){
+	$('#branches-top').show();
+	$('.plant-left').hide();
+	$('.plant-right').hide();
 	$('.item_left').animate({
 		'left':'0px',
 		'opacity':1
@@ -563,10 +609,7 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate('precio', true);
 	}
 	if(SITE.actual_section === 'precio'){
-		if(SITE.actual_rango === null){
-			alert('selecciona un rango de precio');
-			return 0;
-		}
+		
 		Backbone.history.navigate('vivienda', true);
 	}
 	if(SITE.actual_section === 'vivienda'){
@@ -655,8 +698,6 @@ $('#link_tips').on('click', function(){
 
 var sizeAdjust = function(){
 	if(height <= 801){
-		
-		
 		$('#footer').css({'bottom':'-240px'});
 		$('.grass').css({'bottom':'-70px'});
 		$('.title_section').css({'bottom':'-85px'});
@@ -668,18 +709,27 @@ var sizeAdjust = function(){
 		});
 		$('#wrap').css({'top':'10%'});
 		$('#add_title').css({'top':'16px'});
+		$('#header').css({'top':'30px'});
+		$('.price_list').css({'margin':'35px auto', 'height':'310px' });
 	} else {
-		$('#wrap').css({'top':'20%'})
-		$('#header').css({'top':'210px'});	
+		$('#wrap').css({'top':'20%'});
+		$('#header').css({'top':'210px'});
 		$('#footer').css({'bottom':'-180px'});
-		$('.grass').css({'bottom':'10px'});
-		$('.title_section').css({'bottom':'10px'});
+		$('.grass').css({'bottom':'-10px'});
+		$('.title_section').css({'bottom':'-10px'});
+		$('.price_list').css({'margin':'5px auto', 'height':'450px' });
 	}
 };
-
 $(window).resize(function(){
 	height = $(window).outerHeight();
 	sizeAdjust();
 	/*$('#container').css({'top':'70px'});*/
 });
+/*if(width <= 420 ){
+
+	$('#submenu').rollbar({
+		autoHide: false,
+	});
+}*/
+
 sizeAdjust();
