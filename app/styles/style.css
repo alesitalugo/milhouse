@@ -74,7 +74,6 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	top: 55px;
 	left: 46px;
 	height: 0px;
-
 }
 .plants{
 	height: 160px;
@@ -84,22 +83,20 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	float: right;
 	left: -58px;
 	opacity: 0;
-
 }
 .plant-left{
 	background-image: url(../images/new/plantsLeft01.png);
-height: 110px;
-width: 33.333%;
-position: absolute;
-left: 0px;
-
+	height: 110px;
+	width: 33.333%;
+	position: absolute;
+	left: 0px;
 }
 .plant-right{
 	background-image: url(../images/new/plantsRight01.png);
 	height: 108px;
-width: 33.333%;
-position: absolute;
-right: 0px;
+	width: 33.333%;
+	position: absolute;
+	right: 0px;
 }
 .line_home{
 	height: 280px;
@@ -407,7 +404,7 @@ right: 0px;
 	z-index: 10;
 }
 .nav_menu{
-	width: 940px;
+	width: 970px;
 	margin: 0 auto;
 	position: relative;
 	height: 30px;
@@ -545,6 +542,12 @@ right: 0px;
 	background: url(../images/new/titles/title_p09.png);
 	
 	opacity: 1;
+}
+.title_section .ecotecnologias{
+	background: url(../images/new/titles/title_p11.png);
+	opacity: 1;
+	top: 14px !important;
+	left: 10px !important;
 }
 
 .grass{
@@ -966,9 +969,9 @@ right: 0px;
 }
 .precio_info{
 	height: 44px;
-width: 135px;
-float: none;
-margin: 0px;
+	width: 135px;
+	float: none;
+	margin: 0px;
 }
 .precio_info .info{
 	width: 78px;
@@ -1024,7 +1027,7 @@ margin: 0px;
 }
 .more_button{
 	text-decoration: none;
-	width: 90px;
+	width: 70px;
 	height: 35px;
 	background-color: #85b23d;
 	border-radius: 25px;
@@ -1054,6 +1057,11 @@ margin: 0px;
 	background-color: #fff;
 	color: #85b23d;
 }
+.precio_column .active{
+	background-color: #fff;
+	color: #85b23d;
+}
+
 .more_button:hover > .icon{
 	background-position: -231px -109px;	
 }
@@ -1090,7 +1098,7 @@ margin: 0px;
 	text-decoration: none;
 }
 .on .text-tipovivienda p{
-		background-color:#fff !important;
+	background-color:#fff !important;
 	color: #85b23d;
 }
 .text-tipovivienda p{
@@ -1117,7 +1125,7 @@ margin: 0px;
 }
 .descripcion_column .assets{
 	height: 75px;
-	margin: 10px 0 ;
+	margin: 5px 0 ;
 }
 .text-tipovivienda p:hover{
 	background-color:#fff !important;
@@ -1159,7 +1167,7 @@ margin: 0px;
 	width: 120px;
 	height: 120px;
 	border-radius: 50%;
-		-webkit-border-radius: 50% ;
+	-webkit-border-radius: 50% ;
 	-moz-border-radius: 50%;
 	-o-border-radius: 50% ;
 	-ms-border-radius: 50% ;
@@ -1411,7 +1419,7 @@ a.buttons_item:hover > .icon{
 	padding-left: 47px;
 	z-index: 1;
 	border-radius: 25px 25px 25px 25px;
-				-webkit-border-radius:25px 25px 25px 25px;
+	-webkit-border-radius:25px 25px 25px 25px;
 	-moz-border-radius:25px 25px 25px 25px;
 	-o-border-radius:25px 25px 25px 25px;
 	-ms-border-radius: 25px 25px 25px 25px ;
@@ -1442,6 +1450,13 @@ a.buttons_item:hover > .icon{
 }
 .techo p {
 	width: 50px;
+}
+.agua_btn{
+	left: 170px;
+	top: 180px;
+}
+.luz_btn{
+	left: 350px;
 }
 #modal_box{
 	width: 100%;
@@ -1530,7 +1545,7 @@ a.buttons_item:hover > .icon{
 	zoom: 1;
 	border: 2px solid #84b23d;
 	border-radius: 50%;
-		-webkit-border-radius:50%;
+	-webkit-border-radius:50%;
 	-moz-border-radius:50%;
 	-o-border-radius:50%;
 	-ms-border-radius:50%;
@@ -1820,7 +1835,7 @@ top: 48px;
 	height: 57px;
 	position: relative;
 	float: left;
-top: 48px;
+	top: 48px;
 }
 .circles svg{
 	float: left;
@@ -2084,4 +2099,26 @@ top: 48px;
 	line-height: 0px;
 	position: relative;
 	top: 49px;
+}
+.plants_header{
+	height: 200px;
+	width: 100%;
+}
+.plants_header .left_plant{
+	background: yellow;
+	height: 200px;
+	width: 20%;
+	position: absolute;
+	left: 0px;
+}
+.plants_header .right_plant{
+	background: yellow;
+	height: 200px;
+	width: 20%;
+	position: absolute;
+	right: 0px;
+	
+}
+.plants_header .logo_header{
+	
 }

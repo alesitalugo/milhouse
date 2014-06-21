@@ -7,8 +7,6 @@ var resetAnimation = function(){
 	$('#wrap').css({'top':'-100%'});
 };
 
-var folder = '/clientes/sisevive/';
-
 var resetScrollbar = function(){
 	var minsizeforscrolling = (height - 275);
 	console.log(minsizeforscrolling);
