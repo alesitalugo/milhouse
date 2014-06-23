@@ -678,7 +678,6 @@ $(window).keydown(function(e){
 	
 	if(e.keyCode === 39){
 		e.preventDefault();
-		console.log('next');
 		SITE.rotate_circle_next();
 		if(SITE.actual_section === 'home'){
 			Backbone.history.navigate('estados', true);
@@ -734,7 +733,6 @@ $(window).keydown(function(e){
 	}
 	if(e.keyCode === 37 ){
 		e.preventDefault();
-		//console.log('prev');
 		SITE.rotate_circle_prev();
 		if(SITE.actual_section === 'ecotecnologias'){
 			Backbone.history.navigate('materiales', true);
