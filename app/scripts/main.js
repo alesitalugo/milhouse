@@ -5,9 +5,10 @@ var height = $(window).outerHeight();
 var resetAnimation = function(){
 	/*$('#container').css({'top':'-730px'});*/
 	$('#wrap').css({'top':'-100%'});
+	$('.print_button').hide();
 };
 
-var folder = '/clientes/sisevive/';
+//var folder = '/clientes/sisevive/';
 
 var resetScrollbar = function(){
 	var minsizeforscrolling = (height - 275);
@@ -27,7 +28,6 @@ var SITE = (function(){
 	var actual_vivienda = null;
 	var actual_rango = null;
 	var actual_resultado = null;
-
 	return{
 		'site_loaded': site_loaded,
 		'actual_section': actual_section,
@@ -215,6 +215,7 @@ var get_mapa_estado = function( estado ){
 						}
 						SITE.actual_municipio = localidad;
 					});
+					
 				}
 			});
 		}
@@ -269,7 +270,6 @@ var get_tipo_vivienda = function(){
 				$(this).addClass('on');
 				a.preventDefault();
 				var tipo = $(this).attr('id');
-				//console.log(tipo);
 				SITE.actual_vivienda = tipo;
 			});
 		}
@@ -303,7 +303,6 @@ var get_rango_precio = function(){
 			if(height >=900){
 				$('.price_list').rollbar({ autoHide: false, });
 			}
-
 		}
 	});
 };
@@ -357,16 +356,17 @@ var get_grafica_resultados = function(){
 				$(this).find('.number').html(num+'<span>%</span>');
 		    });
 
-		    for (var i = 1; i <= 5; i++) {
-		        var child = document.getElementById('circles-' + i), percentage = child.getAttribute('data-percent');
+		    for(var i = 1; i <= 3; i++){
+		        var child = document.getElementById('circles-'+i);
+		        var percentage = child.getAttribute('data-percent');
 		        Circles.create({
-					id: child.id,
+					id: child.getAttribute('id'),
 					percentage: percentage,
 					radius: 55,
 					width: 10,
 					number: percentage,
 					text: '%',
-					colors: colors[i - 1]
+					colors: colors[i - 1],
 		        });
 		    }
 		}
@@ -412,6 +412,8 @@ var get_materiales = function(){
 			$('#close_modal').on('click', function(){
 				$('#modal_box').fadeOut(500);
 			});
+			$('.print_button').fadeOut();
+			$('#next').show();
 		}
 	});
 };
@@ -436,6 +438,7 @@ var get_ecotecnologias = function(){
 			$('#close_modal').on('click', function(){
 				$('#modal_box').fadeOut(500);
 			});
+			$('.print_button').fadeIn(500, function(){});
 		}
 	});
 };
@@ -447,7 +450,7 @@ var animateHome = function(){
 	$('.item_left').animate({
 		'left':'0px',
 		'opacity':1
-	}, 1000, 'expo', function(){
+	}, 2000, 'expo', function(){
 		$('.item_right').animate({
 			'left':'0px',
 			'opacity':1
@@ -465,14 +468,7 @@ var show_section_home = function(){
 	SITE.actual_section = 'home';
 	SITE.rotate_circle('home');
 	$('#prev').hide();
-	animateHome();
-	/*$('#container').animate({'top':'250px'}, 500 , 'expo', function(){
-	});*/
-	if(height<=800){
-		/*$('#container').animate({'top':'85px'}, 500 , 'expo', function(){
-			animateHome();
-		});*/
-	}
+	animateHome(2000);
 	$('#stage').hide();
 	$('#home').fadeIn();
 	$('#header-logo').css({'top':'-200px'});
@@ -550,6 +546,7 @@ $('#header-logo').on('click', '.home_link', function(a){
 	SITE.rotate_circle_next();
 	$('#prev').fadeOut(500);
 	Backbone.history.navigate('', true);
+	resetAnimation();
 	return false;
 });
 $('#link_home').on('click', function(e){

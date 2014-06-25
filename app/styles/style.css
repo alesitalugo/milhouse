@@ -88,14 +88,20 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	background-image: url(../images/new/plantsLeft01.png);
 	height: 110px;
 	width: 33.333%;
-	position: absolute;
-	left: 0px;
+	position: fixed;
+	left: 0;
+	background-position: 31px 0px;
+	/*-webkit-transform: 360deg;
+  	-moz-transform:    360deg;
+  	-ms-transform:     360deg;
+ 	-o-transform:      360deg;
+  	transform:         360deg;*/
 }
 .plant-right{
 	background-image: url(../images/new/plantsRight01.png);
 	height: 108px;
 	width: 33.333%;
-	position: absolute;
+	position: fixed;
 	right: 0px;
 }
 .line_home{
@@ -437,6 +443,14 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 #next{
 	right: 0;
 	background-position: -91px -100px;
+}
+/*STYLE FOR PRINT BUTTON */
+.print_button{
+	background-position:-283px -88px !important;
+	width: 114px;
+	height: 79px;
+	display: none;
+	right: 0;
 }
 .assets-footer{
 	position: relative;
@@ -788,6 +802,9 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	margin: 5px 0px;
 	color: #476501;
 }
+.search_municipio p span{
+	font-weight: bold;
+}
 .search_municipio input {
 	width: 70%;
 	height: 30px;
@@ -1026,6 +1043,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	padding: 0;
 }
 .more_button{
+	cursor: pointer;
 	text-decoration: none;
 	width: 70px;
 	height: 35px;
@@ -2117,8 +2135,5 @@ top: 48px;
 	width: 20%;
 	position: absolute;
 	right: 0px;
-	
-}
-.plants_header .logo_header{
 	
 }
