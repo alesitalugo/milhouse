@@ -2,23 +2,48 @@
 /* jshint camelcase: false */
 /* global Backbone, _, alert, Circles */
 var height = $(window).outerHeight();
+var sizeAdjust = function(){
+	$('.price_list').height(height-300);
+	$('.content_table').height(height-320);
+	if(height <= 801){
+		$('#footer').css({'bottom':'-243px'});
+		$('.grass').css({'bottom':'-70px'});
+		$('.title_section').css({'bottom':'-71px'});
+		$('.nav_menu .arrow').css({'top':'-55px'});
+		$('#patrocinadores').css({
+			'position': 'relative',
+			'top': '-160px'
+		});
+		$('#wrap').css({'top':'13%'});
+		$('#add_title').css({'top':'16px'});
+		$('#nav').css({'top':'3%'});
+	} else {
+		$('#wrap').css({'top':'16%'});
+		$('#nav').css({'top':'15%'});
+		$('#footer').css({'bottom':'-180px'});
+		$('.grass').css({'bottom':'-10px'});
+		$('.title_section').css({'bottom':'-10px'});
+		$('.content_table').height(height-470);
+	}
+};
+$(window).resize(function(){
+	height = $(window).outerHeight();
+	$('.price_list').height(height-300);
+	$('.content_table').height(height-320);
+	sizeAdjust();
+});
+$(window).load(function(){
+	$('.price_list').height(height-300);
+	$('.content_table').height(height-320);
+	sizeAdjust();
+});
+sizeAdjust();
 var resetAnimation = function(){
-	/*$('#container').css({'top':'-730px'});*/
 	$('#wrap').css({'top':'-100%'});
 	$('.print_button').hide();
 };
 
-//var folder = '/clientes/sisevive/';
 
-var resetScrollbar = function(){
-	var minsizeforscrolling = (height - 275);
-	console.log(minsizeforscrolling);
-	if(minsizeforscrolling <= 355){
-		
-	}
-};
-
-resetScrollbar();
 var SITE = (function(){
 	var site_loaded = false;
 	var actual_section = 'home';
@@ -71,35 +96,22 @@ var SITE = (function(){
 			}
 		},
 		rotate_circle_next: function(){
-			/*$('.grass').rotate({angle: 0,
-            animateTo:180}, 'expo');
-			$('.title_section').rotate({angle: -360,
-            animateTo:0}, 'expo');*/
-		
+			
 		},
 		rotate_circle_prev:function(){
-			/*$('.grass').rotate({angle: 0,
-            animateTo:-180}, 'expo');
-			$('.title_section').rotate({angle: 360,
-            animateTo:0},'expo');*/
+			
 		},
 		rotate_circle: function( section ){
-			
 			$('#add_title').removeClass().addClass(section);
 			$('#button_'+section).fadeIn();
 			if(height <= 801){
-				/*$('#container').animate({'top':'90px'}, 1000, 'expo');*/
-
 				$('#wrap').animate({'top':'12%'}, 1000, 'expo');
 			} else {
 				$('#wrap').animate({'top':'20%'}, 1000, 'expo');
-				/*$('#container').animate({'top':'170px'}, 1000 , 'expo');*/
 			}
 		}
 	};
 }());
-
-SITE.rotate_circle_next();
 
 var tooltips = function( svg, tipo ){
 	var paths = document.querySelectorAll( svg );
@@ -181,7 +193,6 @@ var get_mapa_estado = function( estado ){
 				contentType : 'application/json',
 				url: '/api/'+estado+'.json',
 				beforeSend: function(){
-					//console.log( '/api/'+estado+'.json' );
 				},
 				success: function(response){
 					var html_table = '';
@@ -243,7 +254,6 @@ var get_calificacion = function(){
 				$('.selected').removeClass('on');
 				$(this).find('.selected').addClass('on');
 				calif = $(this).data('calif');
-				//console.log(calif);
 				SITE.actual_calif = calif;
 			});
 		}
@@ -299,10 +309,8 @@ var get_rango_precio = function(){
 				$(this).addClass('on');
 				SITE.actual_rango = rango_select;
 			});
+			$('.price_list').height(height-300);
 			$('.price_list').rollbar();
-			if(height >=900){
-				$('.price_list').rollbar({ autoHide: false, });
-			}
 		}
 	});
 };
@@ -322,13 +330,15 @@ var get_busqueda = function(){
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('busqueda');
 			SITE.actual_section = 'busqueda';
+			
+			$('.content_table').height(height-320);
+
 			$('.content_table').rollbar();
 			$('.more_button').on('click', function(){
 				$('.precio_column .more_button').removeClass('active');
 				$(this).addClass('active');
 			});
 			var findResultado = $('.body_table').find('active');
-			console.log(findResultado);
 		}
 	});
 };
@@ -766,7 +776,6 @@ $(window).keydown(function(e){
 $('#prev').on('click', function(e){
 	e.preventDefault();
 	SITE.rotate_circle_prev();
-	console.log( SITE.actual_section );
 	if(SITE.actual_section === 'ecotecnologias'){
 		Backbone.history.navigate('materiales', true);
 	}
@@ -806,7 +815,6 @@ $('.selected_calf').on('click', function(){
 
 $('#stage').on('click', '.buttons_item', function(a){
 	a.preventDefault();
-	console.log('modal');
 	$('.modal_caracteristicas').fadeIn(500);
 });
 
@@ -829,34 +837,3 @@ $('#link_tips').on('click', function(){
 	});
 	$('.tip_content').rollbar();
 });
-
-var sizeAdjust = function(){
-	if(height<=900){
-		$('.price_list').css({'margin':'35px auto', 'height':'310px' });
-	}else if(height <= 801){
-		$('#footer').css({'bottom':'-240px'});
-		$('.grass').css({'bottom':'-70px'});
-		$('.title_section').css({'bottom':'-85px'});
-		$('.nav_menu .arrow').css({'top':'-55px'});
-		$('.container_modal').css({'margin':'170px auto'});
-		$('#patrocinadores').css({
-			'position': 'relative',
-			'top': '-160px'
-		});
-		$('#wrap').css({'top':'10%'});
-		$('#add_title').css({'top':'16px'});
-		$('#header').css({'top':'30px'});
-	} else {
-		$('#wrap').css({'top':'17%'});
-		$('#header').css({'top':'210px'});
-		$('#footer').css({'bottom':'-180px'});
-		$('.grass').css({'bottom':'-10px'});
-		$('.title_section').css({'bottom':'-10px'});
-		$('.price_list').css({'margin':'5px auto', 'height':'450px' });
-	}
-};
-$(window).resize(function(){
-	height = $(window).outerHeight();
-	sizeAdjust();
-});
-sizeAdjust();
