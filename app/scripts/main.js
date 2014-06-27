@@ -10,13 +10,11 @@ var sizeAdjust = function(){
 		$('.grass').css({'bottom':'-70px'});
 		$('.title_section').css({'bottom':'-71px'});
 		$('.nav_menu .arrow').css({'top':'-55px'});
-		$('#patrocinadores').css({
-			'position': 'relative',
-			'top': '-160px'
-		});
+		$('#patrocinadores').css({'position': 'relative','top': '-160px'});
 		$('#wrap').css({'top':'13%'});
 		$('#add_title').css({'top':'16px'});
 		$('#nav').css({'top':'3%'});
+		$('#section_six').css({'top': '30px'});
 	} else {
 		$('#wrap').css({'top':'16%'});
 		$('#nav').css({'top':'15%'});
@@ -24,6 +22,7 @@ var sizeAdjust = function(){
 		$('.grass').css({'bottom':'-10px'});
 		$('.title_section').css({'bottom':'-10px'});
 		$('.content_table').height(height-470);
+		$('#section_six').css({'top': '0px'});
 	}
 };
 $(window).resize(function(){
@@ -38,11 +37,11 @@ $(window).load(function(){
 	sizeAdjust();
 });
 sizeAdjust();
+
 var resetAnimation = function(){
 	$('#wrap').css({'top':'-100%'});
 	$('.print_button').hide();
 };
-
 
 var SITE = (function(){
 	var site_loaded = false;
@@ -94,12 +93,6 @@ var SITE = (function(){
 					}
 				});
 			}
-		},
-		rotate_circle_next: function(){
-			
-		},
-		rotate_circle_prev:function(){
-			
 		},
 		rotate_circle: function( section ){
 			$('#add_title').removeClass().addClass(section);
@@ -154,8 +147,6 @@ var get_mapa_mexico = function(){
 		},
 		success: function( response ) {
 			$('#home').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#branches-top').hide();
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('mapa');
@@ -178,8 +169,6 @@ var get_mapa_estado = function( estado ){
 		},
 		success: function( response ) {
 			$('#home').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#branches-top').hide();
 			$('#stage').html( response ).fadeIn();
 			SITE.rotate_circle('estado');
@@ -243,8 +232,6 @@ var get_calificacion = function(){
 		success: function(response){
 			$('#home').hide();
 			$('#branches-top').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('calificacion');
 			SITE.actual_section = 'calificacion';
@@ -270,8 +257,6 @@ var get_tipo_vivienda = function(){
 		success: function(response){
 			$('#home').hide();
 			$('#branches-top').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('vivienda');
 			SITE.actual_section = 'vivienda';
@@ -296,8 +281,6 @@ var get_rango_precio = function(){
 		success: function(response){
 			$('#home').hide();
 			$('#branches-top').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('precio');
 			SITE.actual_section = 'precio';
@@ -324,14 +307,12 @@ var get_busqueda = function(){
 		},
 		success: function(response){
 			$('#home').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#branches-top').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('busqueda');
 			SITE.actual_section = 'busqueda';
 			
-			$('.content_table').height(height-320);
+			$('.content_table').height(height-470);
 
 			$('.content_table').rollbar();
 			$('.more_button').on('click', function(){
@@ -353,8 +334,6 @@ var get_grafica_resultados = function(){
 		success: function(response){
 			$('#next').fadeIn(500);
 			$('#home').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#branches-top').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('resultados');
@@ -391,8 +370,6 @@ var get_caracteristicas = function(){
 		},
 		success: function(response){
 			$('#home').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#branches-top').hide();
 			$('#stage').html(response).fadeIn();
 			SITE.rotate_circle('caracteristicas');
@@ -410,8 +387,6 @@ var get_materiales = function(){
 			resetAnimation();
 		},
 		success: function(response){
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#branches-top').hide();
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
@@ -436,8 +411,6 @@ var get_ecotecnologias = function(){
 		},
 		success: function(response){
 			$('#next').hide();
-			$('.plant-left').show();
-			$('.plant-right').show();
 			$('#branches-top').hide();
 			$('#home').hide();
 			$('#stage').html(response).fadeIn();
@@ -455,8 +428,6 @@ var get_ecotecnologias = function(){
 
 var animateHome = function(){
 	$('#branches-top').show();
-	$('.plant-left').hide();
-	$('.plant-right').hide();
 	$('.item_left').animate({
 		'left':'0px',
 		'opacity':1
@@ -553,7 +524,6 @@ $('#header-logo').on('click', '.home_link', function(a){
 	SITE.actual_section = 'home';
 	SITE.rotate_circle('home');
 	$('#next').fadeIn(500);
-	SITE.rotate_circle_next();
 	$('#prev').fadeOut(500);
 	Backbone.history.navigate('', true);
 	resetAnimation();
@@ -564,7 +534,6 @@ $('#link_home').on('click', function(e){
 	SITE.take_pills( 'home', 'hide' );
 	SITE.actual_section = 'home';
 	$('#next').fadeIn(500);
-	SITE.rotate_circle_next();
 	SITE.rotate_circle('home');
 	$('#prev').fadeOut(500);
 	Backbone.history.navigate('', true);
@@ -589,7 +558,7 @@ $('#stage').on('click', '#Entidad path', function(){
 	if( this.hasAttribute('class') ){
 		var table_items = $('#stage #table_estate .item-localidad');
 		table_items.removeClass('select_item');
-		var municipio = this.dataset.municipio;
+		var municipio = this.getAttribute(municipio);
 		this.style.fill = '#4d6d0c';
 		_.each( table_items, function( table_item ){
 			if( table_item.dataset.municipio.toLowerCase() === municipio ){
@@ -601,7 +570,6 @@ $('#stage').on('click', '#Entidad path', function(){
 
 $('.link-menu').on('click',  function(e){
 	e.preventDefault();
-	SITE.rotate_circle_next();
 	resetAnimation();
 	$('#next').show();
 	$('#prev').show();
@@ -617,12 +585,11 @@ $('.link-menu').on('click',  function(e){
 $('#go_init').on('click', function(a){
 	a.preventDefault();
 	Backbone.history.navigate( 'estados' , true );
-	SITE.rotate_circle_next();
 });
 
 $('#next').on('click', function(e){
 	e.preventDefault();
-	SITE.rotate_circle_next();
+	//SITE.rotate_circle_next();
 	if( SITE.actual_section === 'home'){
 		Backbone.history.navigate( 'estados' , true );
 	}
@@ -678,14 +645,47 @@ $('#next').on('click', function(e){
 		Backbone.history.navigate('ecotecnologias', true);
 	}
 });
-
+$('#prev').on('click', function(e){
+	e.preventDefault();
+	//SITE.rotate_circle_prev();
+	if(SITE.actual_section === 'ecotecnologias'){
+		Backbone.history.navigate('materiales', true);
+	}
+	if(SITE.actual_section === 'materiales'){
+		Backbone.history.navigate('caracteristicas', true);
+	}
+	if(SITE.actual_section === 'caracteristicas'){
+		Backbone.history.navigate('resultados', true);
+	}
+	if(SITE.actual_section === 'resultados'){
+		Backbone.history.navigate('busqueda', true);
+	}
+	if(SITE.actual_section === 'busqueda'){
+		Backbone.history.navigate('vivienda', true);
+	}
+	if(SITE.actual_section === 'vivienda'){
+		Backbone.history.navigate('precio', true);
+	}
+	if(SITE.actual_section === 'precio'){
+		Backbone.history.navigate('calificacion', true);
+	}
+	if(SITE.actual_section === 'calificacion'){
+		Backbone.history.navigate('estados/'+SITE.actual_estado, true);
+	}
+	if(SITE.actual_section === 'municipios'){
+		Backbone.history.navigate('estados', true);
+	}
+	if(SITE.actual_section === 'estados'){
+		Backbone.history.navigate('', true);
+	}
+});
 //funcion de flechas de teclado para anterior y siguiente 
 
 $(window).keydown(function(e){
 	
 	if(e.keyCode === 39){
 		e.preventDefault();
-		SITE.rotate_circle_next();
+		//SITE.rotate_circle_next();
 		if(SITE.actual_section === 'home'){
 			Backbone.history.navigate('estados', true);
 		}
@@ -740,7 +740,7 @@ $(window).keydown(function(e){
 	}
 	if(e.keyCode === 37 ){
 		e.preventDefault();
-		SITE.rotate_circle_prev();
+		//SITE.rotate_circle_prev();
 		if(SITE.actual_section === 'ecotecnologias'){
 			Backbone.history.navigate('materiales', true);
 		}
@@ -773,40 +773,7 @@ $(window).keydown(function(e){
 		}
 	}
 });
-$('#prev').on('click', function(e){
-	e.preventDefault();
-	SITE.rotate_circle_prev();
-	if(SITE.actual_section === 'ecotecnologias'){
-		Backbone.history.navigate('materiales', true);
-	}
-	if(SITE.actual_section === 'materiales'){
-		Backbone.history.navigate('caracteristicas', true);
-	}
-	if(SITE.actual_section === 'caracteristicas'){
-		Backbone.history.navigate('resultados', true);
-	}
-	if(SITE.actual_section === 'resultados'){
-		Backbone.history.navigate('busqueda', true);
-	}
-	if(SITE.actual_section === 'busqueda'){
-		Backbone.history.navigate('vivienda', true);
-	}
-	if(SITE.actual_section === 'vivienda'){
-		Backbone.history.navigate('precio', true);
-	}
-	if(SITE.actual_section === 'precio'){
-		Backbone.history.navigate('calificacion', true);
-	}
-	if(SITE.actual_section === 'calificacion'){
-		Backbone.history.navigate('estados/'+SITE.actual_estado, true);
-	}
-	if(SITE.actual_section === 'municipios'){
-		Backbone.history.navigate('estados', true);
-	}
-	if(SITE.actual_section === 'estados'){
-		Backbone.history.navigate('', true);
-	}
-});
+
 
 $('.selected_calf').on('click', function(){
 	$('.selected').removeClass('on');

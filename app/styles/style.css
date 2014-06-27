@@ -377,6 +377,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 .nav_menu .arrow:hover:after{
 	-webkit-animation: sonarEffect 3.3s ease-out 75ms;
 	-moz-animation: sonarEffect 3.3s ease-out 75ms;
+	-ms-transform: sonarEffect 3.3s ease-out 75ms;
 	animation: sonarEffect 3.3s ease-out 75ms;
 }
 #prev{
@@ -418,9 +419,6 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	display: block;
 	padding-top: 15px;
 }
-#logo a img {
-
-}
 #round {
 	width: 980px;
 	margin: 0 auto;
@@ -438,70 +436,57 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 #add_title{
 	margin: 0 auto;
 	position: relative;
-	top: 28px;
+	top: 24px;
 	left: 5px;
 	width: 678px;
 	text-align: center;
 	height: 246px;
 	background-repeat: no-repeat;
-	
-}	
+	transition: background 1s ease-in-out;
+	-webkit-transition: background 1s ease-in-out;
+	-moz-transition: background 1s ease-in-out;
+	-o-transition: background 1s ease-in-out;
+	-ms-transition: background 1s ease-in-out;
+}
 
 /*ADD TITLES SECTION*/
 
-
 .title_section .home{
 	background: url(../images/new/titles/title_p01.png);	
-	opacity: 1;
 }
 .title_section .mapa{
 	background: url(../images/new/titles/title_p02.png);	
-	opacity: 1;
 }
 .title_section .estado{
 	background: url(../images/new/titles/title_p03.png);	
-	opacity: 1;
 }
 .title_section .calificacion{
 	background: url(../images/new/titles/title_p04.png);	
-	opacity: 1;
 }
 .title_section .precio{
 	background: url(../images/new/titles/title_p05.png);	
-	opacity: 1;
 }
 .title_section .vivienda{
 	background: url(../images/new/titles/title_p06.png);	
-	opacity: 1;
-	top: 19px !important;
+	/*top: 19px !important;*/
 }
 .title_section .busqueda{
 	background: url(../images/new/titles/title_p07.png);
-	
-	opacity: 1;
 }
 .title_section .resultados{
 	background: url(../images/new/titles/title_p08.png);
-	
-	opacity: 1;
 }
 .title_section .materiales{
 	background: url(../images/new/titles/title_p10.png);
-	
-	opacity: 1;
 }
 .title_section .caracteristicas{
 	background: url(../images/new/titles/title_p09.png);
-	
-	opacity: 1;
 }
 .title_section .ecotecnologias{
 	background: url(../images/new/titles/title_p11.png);
-	opacity: 1;
-	top: 14px !important;
-	left: 10px !important;
+	/*top: 14px !important;
+	left: 10px !important;*/
 }
-
 .grass{
 	background: url('../images/fixedgrass01.png');
 	width: 980px;
@@ -547,15 +532,12 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 }
 #link_video .icon{
 	background-position:-56px -54px ;
-
 }
 #link_tips .icon{
 	background-position:-103px -56px ;
-
 }
 #link_desarrollo .icon {
 	background-position:-160px -54px;
-
 }
 #page_menu .page-item a{
 	text-align: center;
@@ -564,9 +546,6 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	text-transform: uppercase;
 	font-size: 12px;
 	font-family: 'nillandregular';
-}
-#page_menu .page-item a:hover{
-	
 }
 #external_links{
 	width: 935px;
@@ -590,13 +569,9 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 	font-family: 'shantiregular';
 	line-height: 30px;
 }
-#external_links .external_item a:hover{
-
-}
 .data-table{
 	width: 360px;
 }
-
 .table-header{
 	width: 300px;
 	background: #85b23d;
@@ -1029,7 +1004,7 @@ a, a:active, a:focus, a:hover, a:visited, a:link, a img {
 }
 #section_six{
 	position: relative;
-	top: 30px;
+	/*top: 0px;*/
 }
 .content_table {
 	height: 370px;
